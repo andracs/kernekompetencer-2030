@@ -1,0 +1,105 @@
+{
+  "format": "coreskills2030",
+  "version": 1,
+  "base": "WEF Future of Jobs Report 2025, fig. 3.6",
+  "exported": "2026-10-07T11:21:25.624Z",
+  "skills": [
+    {
+      "id": "omuxwmjagz6y",
+      "name": "Samhørighed",
+      "category": "wwo",
+      "x": 12,
+      "y": 75,
+      "note": ""
+    },
+    {
+      "id": "omuxwmt1vj0j",
+      "name": "Situationsfornemmelse",
+      "category": "wwo",
+      "x": 8,
+      "y": 63,
+      "note": ""
+    },
+    {
+      "id": "omuxwnn45inq",
+      "name": "Sanselighed",
+      "category": "wwo",
+      "x": 8,
+      "y": 67,
+      "note": ""
+    },
+    {
+      "id": "omuxwo9lmetx",
+      "name": "Filosofi (Kærlighed til visdom)",
+      "category": "wwo",
+      "x": 49,
+      "y": 71,
+      "note": ""
+    },
+    {
+      "id": "omuxwpdifmz6",
+      "name": "Regenerativ tænkning",
+      "category": "wwo",
+      "x": 24,
+      "y": 74,
+      "note": "Permakultur"
+    },
+    {
+      "id": "omuxwsb8feuw",
+      "name": "Planetære mål",
+      "category": "own",
+      "x": 26,
+      "y": 79,
+      "note": ""
+    },
+    {
+      "id": "omuxwsjn1i1n",
+      "name": "Samskabelse / togetherness",
+      "category": "wwo",
+      "x": 9,
+      "y": 84,
+      "note": ""
+    },
+    {
+      "id": "omuxx5hn5xow",
+      "name": "Etiske fordring",
+      "category": "eth",
+      "x": 47,
+      "y": 81,
+      "note": ""
+    },
+    {
+      "id": "omuxx6043b9l",
+      "name": "Analogisering",
+      "category": "tec",
+      "x": 13,
+      "y": 55,
+      "note": ""
+    },
+    {
+      "id": "omuxx6lzksbk",
+      "name": "Slow & fast & flow",
+      "category": "eth",
+      "x": 53,
+      "y": 62,
+      "note": ""
+    },
+    {
+      "id": "omuxx7n5b6p0",
+      "name": "Nøjsom / sparsom",
+      "category": "tec",
+      "x": 26,
+      "y": 60,
+      "note": ""
+    },
+    {
+      "id": "omuxx7x9s432",
+      "name": "Humanisme",
+      "category": "tec",
+      "x": 29,
+      "y": 83,
+      "note": ""
+    }
+  ],
+  "source": "Zealand Videndag 2026, workshop om kernekompetencer i 2030"
+}

@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Core Skills 2030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F6F7; --card:#FFFFFF; --ink:#000000; --muted:#5C5C5C; --line:#E2E2E4;
+  --accent:#000000; --accent-ink:#FFF387; --accent-soft:#FFF387; --accent-soft-ink:#000000; --chip:#F6F6F7; --warn-soft:#F0F0F1; --warn-ink:#3A3A3A;
+  --hl-bg:#FFF387; --hl-ink:#000000;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 28px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --card:#111111; --ink:#FFFFFF; --muted:#A3A3A3; --line:#2A2A2A;
+    --accent:#FFF387; --accent-ink:#000000; --accent-soft:#2E2C12; --accent-soft-ink:#FFF387; --chip:#1A1A1A; --warn-soft:#222222; --warn-ink:#D9D9D9;
+    --hl-bg:transparent; --hl-ink:#FFF387;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --card:#111111; --ink:#FFFFFF; --muted:#A3A3A3; --line:#2A2A2A;
+  --accent:#FFF387; --accent-ink:#000000; --accent-soft:#2E2C12; --accent-soft-ink:#FFF387; --chip:#1A1A1A; --warn-soft:#222222; --warn-ink:#D9D9D9;
+  --hl-bg:transparent; --hl-ink:#FFF387;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Inter,"Helvetica Neue",Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:32px 16px 48px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+h1{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(30px,5.4vw,52px);line-height:1.05;letter-spacing:-.025em;margin:0 0 14px;font-weight:700}
+h1 span{background:var(--hl-bg);color:var(--hl-ink);padding:0 .14em;margin-left:-.14em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.lead{max-width:760px;color:var(--muted);font-size:16px;margin:0 0 24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
+.group{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+button,.btn{font:inherit;font-size:13px;font-weight:600;color:var(--ink);background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;transition:background .15s,border-color .15s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+button:hover,.btn:hover{border-color:var(--accent)}
+button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.ghost{background:transparent}
+.seg{display:inline-flex;background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;padding:6px 12px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.seg.modes button{padding:7px 14px;font-size:13.5px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;padding:16px;border-bottom:1px solid var(--line)}
+.steps button{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:6px;text-align:left;border-radius:14px;padding:12px 14px;white-space:normal;line-height:1.3;height:100%}
+.steps button .n{font-family:"Space Grotesk",Inter,sans-serif;font-size:12px;font-weight:700;width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.steps button .t{font-size:13.5px;font-weight:700}
+.steps button .s{font-size:12px;font-weight:500;color:var(--muted)}
+.steps button[aria-pressed="true"] .s{color:inherit;opacity:.8}
+.steps button[aria-pressed="true"] .n{background:var(--accent-ink);color:var(--accent);border-color:transparent}
+.steps button:not(:last-child)::after{content:"→";position:absolute;right:-20px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:17px;font-weight:600;pointer-events:none}
+@media (max-width:760px){.steps{grid-template-columns:1fr 1fr;gap:10px}.steps button::after{display:none}}
+.modelead{margin:0;padding:14px 16px 0;font-size:14.5px;color:var(--ink);max-width:880px}
+.legend{display:flex;flex-wrap:wrap;gap:6px;padding:12px 16px 4px}
+.legend button{font-weight:500;background:transparent}
+.legend button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-soft-ink);border-color:var(--accent)}
+.dot{width:11px;height:11px;border-radius:50%;flex:none;display:inline-block}
+.markers{display:flex;flex-wrap:wrap;gap:16px;padding:6px 16px 0;font-size:12.5px;color:var(--muted)}
+.markers span{display:inline-flex;align-items:center;gap:6px}
+.markers svg{flex:none}
+.hint{font-size:12.5px;color:var(--muted);padding:4px 16px 0;margin:0}
+.chart{position:relative;overflow-x:auto;padding:4px 8px 8px;-webkit-overflow-scrolling:touch}
+.chart svg{display:block;width:100%;min-width:720px;height:auto;touch-action:manipulation}
+.chart .pt{cursor:pointer}
+.chart .pt .mk{transition:stroke-width .12s}
+.chart .pt:hover .mk,.chart .pt.on .mk{stroke-width:4}
+.chart .own{cursor:grab}
+.chart .own.drag{cursor:grabbing}
+.chart.placing svg{cursor:crosshair}
+.tip{position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:10px 12px;font-size:13px;min-width:200px;max-width:270px;opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;z-index:5}
+.tip.show{opacity:1;transform:none}
+.tip b{display:block;font-size:14px;margin-bottom:4px;line-height:1.3}
+.tip .cat{display:flex;align-items:center;gap:6px;color:var(--muted);margin-bottom:8px}
+.tip .row{display:flex;justify-content:space-between;gap:12px}
+.tip .row span:last-child{font-weight:700;font-variant-numeric:tabular-nums}
+.tip .q{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.detail{margin:0 16px 16px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--chip);font-size:13.5px}
+.detail h3{margin:0 0 4px;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.detail p{margin:6px 0}
+.tag{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--card);border:1px solid var(--line);white-space:nowrap;color:var(--muted)}
+.tag.new{background:var(--accent-soft);color:var(--accent-soft-ink);border-color:transparent}
+.tag.move{background:var(--warn-soft);color:var(--warn-ink);border-color:transparent}
+.srcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.srcs a{font-size:12px;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:2px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:2px 9px;text-decoration:none}
+.srcs a:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-soft-ink)}
+.grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-top:16px}
+@media (max-width:820px){.grid2{grid-template-columns:1fr}}
+.pad{padding:18px 20px}
+h2{font-family:"Space Grotesk",Inter,sans-serif;font-size:16px;margin:0 0 12px;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;color:var(--muted);padding:6px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
+th.num,td.num{text-align:right;font-variant-numeric:tabular-nums}
+td{padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td .dot{margin-right:6px;vertical-align:-1px}
+.qtag{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--chip);white-space:nowrap}
+.qtag.core{background:var(--accent-soft);color:var(--accent-soft-ink)}
+.scroll{max-height:560px;overflow:auto}
+.item{padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.item:last-child{border-bottom:0}
+.item h4{margin:0 0 4px;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;cursor:pointer}
+.item p{margin:4px 0;color:var(--ink)}
+.item.sel h4{background:var(--accent-soft);color:var(--accent-soft-ink);margin-left:-6px;padding:2px 6px;border-radius:6px}
+.blind{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
+.blind ul{margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--muted)}
+.blind li{margin-bottom:4px}
+.src p{margin:0 0 10px;font-size:13.5px}
+.src .cite{background:var(--chip);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;margin:12px 0;word-break:break-word}
+.src a{color:var(--ink);text-decoration-color:var(--muted);text-underline-offset:2px}
+.src a:hover{background:var(--hl-bg);color:var(--hl-ink)}
+.src small,.note{color:var(--muted);font-size:12.5px;display:block;line-height:1.55}
+.src h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px}
+.src ul{margin:0;padding-left:18px;font-size:13px}
+.src li{margin-bottom:4px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+form{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-bottom:14px}
+form .full{grid-column:1/-1}
+label{font-size:12px;font-weight:600;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+input,select,textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+textarea{resize:vertical;min-height:60px}
+.rangeRow{display:flex;gap:8px;align-items:center}
+.rangeRow input[type=range]{flex:1;padding:0;border:0;accent-color:var(--accent)}
+.rangeRow input[type=number]{width:72px}
+.ownrow{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.ownrow:last-child{border-bottom:0}
+.ownrow .meta{flex:1;min-width:0}
+.ownrow .meta b{display:block}
+.ownrow .meta span{color:var(--muted);font-size:12.5px}
+.ownrow .btns{display:flex;gap:4px}
+.ownrow .btns button{padding:4px 10px;font-size:12px}
+.banner{font-size:12.5px;background:var(--warn-soft);color:var(--warn-ink);border-radius:10px;padding:8px 12px;margin-bottom:12px}
+.empty{color:var(--muted);font-size:13px;padding:8px 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow" id="eyebrow"></p>
+  <h1 id="title"></h1>
+  <p class="lead" id="lead"></p>
+
+  <div class="card">
+    <nav class="steps" id="modes" aria-label="Trin">
+      <button data-mode="wef"></button>
+      <button data-mode="dkeu"></button>
+      <button data-mode="vid"></button>
+      <button data-mode="own"></button>
+    </nav>
+    <p class="modelead" id="modeLead"></p>
+    <div class="toolbar" style="border-bottom:0;padding-bottom:0">
+      <div class="group">
+        <button id="btnLabels" aria-pressed="true"></button>
+        <button id="btnBgWef" aria-pressed="false"></button>
+        <button id="btnBgDk" aria-pressed="false"></button>
+        <button id="btnBgVid" aria-pressed="false"></button>
+        <button id="btnReset"></button>
+      </div>
+      <div class="group">
+        <div class="seg" role="group" aria-label="Sprog / Language">
+          <button data-lang="da">DA</button>
+          <button data-lang="en">EN</button>
+        </div>
+        <button id="btnTheme" aria-label="Tema">◐</button>
+        <button id="btnPng"></button>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="markers" id="markers"></div>
+    <p class="hint" id="hint"></p>
+    <div class="chart" id="chart"><div class="tip" id="tip"></div></div>
+    <div class="detail" id="detail" hidden></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card pad" id="left"></div>
+    <div class="card pad src" id="source"></div>
+  </div>
+</div>
+
+<script>
+/* ---------- Kilder ---------- */
+const WEF_URL = "https://www.weforum.org/publications/the-future-of-jobs-report-2025/in-full/3-skills-outlook/";
+const EXPLORER_URL = "https://www.weforum.org/publications/the-future-of-jobs-report-2025/data-explorer/";
+const SRC = {
+  wef:     {g:"glob", t:"WEF, The Future of Jobs Report 2025 (2025)", u:WEF_URL},
+  digcomp: {g:"eu",   t:"JRC, DigComp 3.0 (2025)", u:"https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/european-commission-updates-its-digital-competence-framework-digcomp-2025-11-27_en"},
+  aiact:   {g:"eu",   t:"AI Act, artikel 4 (2024/1689)", u:"https://artificialintelligenceact.eu/da/article/4/"},
+  omnibus: {g:"eu",   t:"Digital Omnibus on AI (2026)", u:"https://www.cuatrecasas.com/en/spain/intellectual-property/art/digital-omnibus-ai-has-been-published"},
+  union:   {g:"eu",   t:"Europa-Kommissionen, Union of Skills (2025)", u:"https://employment-social-affairs.ec.europa.eu/news/union-skills-strategy-equip-people-competitive-europe-2025-03-05_en"},
+  cedefop: {g:"eu",   t:"Cedefop, AI skills survey (2025)", u:"https://digital-skills-jobs.europa.eu/en/inspiration/research/skills-empower-workers-ai-revolution-first-findings-cedefops-ai-skills-survey"},
+  eurobaro:{g:"eu",   t:"Eurobarometer om cyberkompetencer (2024)", u:"https://digital-skills-jobs.europa.eu/en/latest/news/eu-faces-growing-cybersecurity-skills-gap-new-eurobarometer-reveals"},
+  enisa:   {g:"eu",   t:"ENISA, State of Cybersecurity in the Union (2024)", u:"https://enisa.europa.eu/news/eus-first-ever-report-on-the-state-of-cybersecurity-in-the-union"},
+  greencomp:{g:"eu",  t:"JRC, GreenComp (2022)", u:"https://joint-research-centre.ec.europa.eu/greencomp-european-sustainability-competence-framework_en"},
+  dd:      {g:"eu",   t:"EU, Digital Decade Country Report Danmark (2025)", u:"https://digital-strategy.ec.europa.eu/en/factpages/denmark-2025-digital-decade-country-report"},
+  digst:   {g:"dk",   t:"Digitaliseringsstyrelsen, Vejledning om AI-færdigheder", u:"https://digst.dk/media/dlhcbfk0/vejledning-i-ai-faerdigheder.pdf"},
+  dst:     {g:"dk",   t:"Danmarks Statistik, virksomhedernes brug af AI (2025)", u:"https://www.dst.dk/da/Statistik/udgivelser/NytHtml?cid=55352"},
+  de:      {g:"dk",   t:"Dansk Erhverv, AI i danske virksomheder 2025 (2026)", u:"https://www.danskerhverv.dk/politik-og-analyser/analyser/2026/februar/danske-virksomheders-brug--af-kunstig-intelligens-ai-i-2025/"},
+  lederne: {g:"dk",   t:"Lederne, AI-kompetencer (2024)", u:"https://www.lederne.dk/-/media/files/analyser/det-er-afgoerende-med-bedre-ai-kompetencer.pdf"},
+  pwc:     {g:"dk",   t:"PwC, AI Jobs Barometer Danmark (2026)", u:"https://www.pwc.dk/da/publikationer/2026/ai-gaar-fra-niche-til-bredere-anvendelse-i-det-danske-arbejdsmarked.html"},
+  cefau:   {g:"dk",   t:"Aarhus Universitet, CEFAU research brief (2025)", u:"https://econ.au.dk/fileadmin/ECON/Subsites/CEFAU/Research_Brief_AI_og_effekten_p%C3%A5_jobs_kompetencekrav_og_l%C3%B8n.pdf"},
+  klima:   {g:"dk",   t:"HBS Economics for Klimarådet (2024)", u:"https://klimaraadet.dk/sites/default/files/node/field_files/Review%20af%20studier%20relateret%20til%20arbejdsmarkedet%20og%20den%20gr%C3%B8nne%20omstilling.pdf"},
+  kbu:     {g:"nord", t:"Kompetansebehovsutvalget, Norge (2025)", u:"https://www.kompetansebehovsutvalget.no/uploads/ryOX1yAG/Kompetansebehovsutvalget_rapport_digitalversjon.pdf"},
+  airad:   {g:"nord", t:"Arbetsmarknadens AI-råd, Sverige (2025)", u:"https://www.almega.se/app/uploads/2025/11/Arbetsmarknadens-AI-rad-%E2%80%93-Insiktsrapport-1-1.pdf"},
+  norden:  {g:"nord", t:"Nordisk Ministerråd, Future Skills", u:"https://www.norden.org/en/future-skills"}
+};
+
+/* ---------- Kategorier (fast rækkefølge, valideret palet) ---------- */
+const CATS = {
+  cog:{en:"Cognitive skills",    da:"Kognitive færdigheder", l:"#2a78d6", d:"#3987e5"},
+  sef:{en:"Self-efficacy",       da:"Mestringstro",          l:"#eb6834", d:"#d95926"},
+  eng:{en:"Engagement skills",   da:"Engagement",            l:"#1baf7a", d:"#199e70"},
+  mgt:{en:"Management skills",   da:"Ledelse og styring",    l:"#eda100", d:"#c98500"},
+  wwo:{en:"Working with others", da:"Samarbejde",            l:"#e87ba4", d:"#d55181"},
+  phy:{en:"Physical abilities",  da:"Fysiske evner",         l:"#008300", d:"#008300"},
+  tec:{en:"Technology skills",   da:"Teknologi",             l:"#4a3aa7", d:"#9085e9"},
+  eth:{en:"Ethics",              da:"Etik",                  l:"#e34948", d:"#e66767"}
+};
+const OWN_CAT = {en:"Own / uncategorised", da:"Egen / ukategoriseret", l:"#5C5C5C", d:"#A3A3A3"};
+const catOf = c => CATS[c] || OWN_CAT;
+
+/* ---------- WEF-data (aflæst fra figur 3.6, afrundet) ---------- */
+const DATA = [
+  {id:"ai",   en:["AI and big data"], da:["AI og big data"], x:47,y:87,c:"tec",p:"r"},
+  {id:"tl",   en:["Technological","literacy"], da:["Teknologisk","forståelse"], x:51,y:76,c:"tec",p:"t"},
+  {id:"ct",   en:["Creative","thinking"], da:["Kreativ","tænkning"], x:58,y:74,c:"cog",p:"b"},
+  {id:"cur",  en:["Curiosity and","lifelong learning"], da:["Nysgerrighed","og livslang","læring"], x:50,y:69,c:"sef",p:"l"},
+  {id:"res",  en:["Resilience, flexibility","and agility"], da:["Robusthed,","fleksibilitet og","omstillingsevne"], x:67,y:69,c:"sef",p:"r"},
+  {id:"lead", en:["Leadership and","social influence"], da:["Ledelse og social","indflydelse"], x:60,y:65,c:"wwo",p:"b"},
+  {id:"tal",  en:["Talent","management"], da:["Talent-","udvikling"], x:47,y:62,c:"mgt",p:"l"},
+  {id:"an",   en:["Analytical","thinking"], da:["Analytisk","tænkning"], x:70,y:61,c:"cog",p:"r"},
+  {id:"sys",  en:["Systems","thinking"], da:["System-","tænkning"], x:44,y:58,c:"cog",p:"b"},
+  {id:"mot",  en:["Motivation and","self-awareness"], da:["Motivation og","selvindsigt"], x:54,y:53,c:"sef",p:"r"},
+  {id:"emp",  en:["Empathy and","active listening"], da:["Empati og","aktiv lytning"], x:50,y:51,c:"wwo",p:"r",dy:24},
+  {id:"svc",  en:["Service orientation and","customer service"], da:["Serviceorientering og","kundeservice"], x:48,y:44,c:"eng",p:"b"},
+  {id:"rm",   en:["Resource management","and operations"], da:["Ressourcestyring","og drift"], x:43,y:32,c:"mgt",p:"r"},
+  {id:"dep",  en:["Dependability and","attention to detail"], da:["Pålidelighed og sans","for detaljer"], x:39,y:24,c:"sef",p:"r"},
+  {id:"qc",   en:["Quality","control"], da:["Kvalitets-","kontrol"], x:33,y:29,c:"mgt",p:"t"},
+  {id:"tm",   en:["Teaching and","mentoring"], da:["Undervisning","og mentoring"], x:28,y:39,c:"wwo",p:"r"},
+  {id:"prog", en:["Programming"], da:["Programmering"], x:12,y:39,c:"tec",p:"l"},
+  {id:"mm",   en:["Marketing","and media"], da:["Marketing","og medier"], x:17,y:35,c:"eng",p:"t"},
+  {id:"ml",   en:["Multi-lingualism"], da:["Flersprogethed"], x:19,y:32,c:"cog",p:"r"},
+  {id:"gc",   en:["Global","citizenship"], da:["Globalt","medborgerskab"], x:6.5,y:29,c:"eth",p:"t"},
+  {id:"rwm",  en:["Reading, writing","and mathematics"], da:["Læsning, skrivning","og matematik"], x:18,y:23,c:"cog",p:"r"},
+  {id:"sen",  en:["Sensory-processing","abilities"], da:["Sanse-","opfattelse"], x:1,y:22,c:"phy",p:"r"},
+  {id:"man",  en:["Manual dexterity, endurance","and precision"], da:["Fingerfærdighed, udholdenhed","og præcision"], x:11,y:16,c:"phy",p:"r"},
+  {id:"net",  en:["Networks and","cybersecurity"], da:["Netværk og","cybersikkerhed"], x:19,y:76,c:"tec",p:"t"},
+  {id:"env",  en:["Environmental","stewardship"], da:["Miljøansvar"], x:20,y:64,c:"eth",p:"t"},
+  {id:"ux",   en:["Design and","user experience"], da:["Design og","brugeroplevelse"], x:23,y:52,c:"tec",p:"l",dy:-7}
+];
+
+/* ---------- DK/EU-laget: vurderede placeringer (ikke surveydata) ---------- */
+const DKEU = [
+  {id:"n1", kind:"new", c:"cog", x:33, y:88, p:"b",
+   name:{da:"AI-samarbejde og verifikation", en:"AI collaboration and verification"},
+   da:["AI-samarbejde og","verifikation"], en:["AI collaboration","and verification"],
+   why:{da:"At specificere opgaver, uddelegere til AI-værktøjer og agenter og kvalitetssikre resultatet. Danske arbejdsgivere efterspørger anvendelse frem for udvikling (PwC). Det svenske AI-råd fremhæver kildesporbarhed og kvalitetssikring, og den norske kompetencebehovsrapport anbefaler kritisk tænkning i brugen af AI. WEF samler det hele under \"AI and big data\".",
+        en:"Specifying tasks, delegating to AI tools and agents, and quality-assuring the result. Danish employers ask for application rather than development (PwC). The Swedish AI council highlights source traceability and quality assurance, and the Norwegian competence needs report recommends critical thinking when using AI. WEF lumps all of this into \"AI and big data\"."},
+   src:["pwc","airad","kbu","digcomp"]},
+  {id:"n2", kind:"new", c:"tec", x:42, y:80, p:"r",
+   name:{da:"Sikkerhedsbevidsthed for alle", en:"Security awareness for everyone"},
+   da:["Sikkerhedsbevidsthed","for alle"], en:["Security awareness","for everyone"],
+   why:{da:"Cyberhygiejne og evnen til at genkende social engineering og AI-baseret svindel som almen kompetence. DigComp 3.0 gør cybersikkerhed til et gennemgående tema for alle borgere. Eurobarometer viser, at 57 % af virksomhederne lægger cyberopgaver oven i andre jobs, og at 74 % ikke har gennemført træning.",
+        en:"Cyber hygiene and the ability to spot social engineering and AI-enabled fraud as a general skill. DigComp 3.0 makes cybersecurity a cross-cutting theme for all citizens. Eurobarometer finds that 57% of companies add cyber tasks on top of other jobs and 74% have run no training."},
+   src:["digcomp","eurobaro"]},
+  {id:"n3", kind:"new", c:"eth", x:12, y:72, p:"r",
+   name:{da:"Regulatorisk forståelse (AI Act, NIS2, GDPR)", en:"Regulatory literacy (AI Act, NIS2, GDPR)"},
+   da:["Regulatorisk forståelse","(AI Act, NIS2, GDPR)"], en:["Regulatory literacy","(AI Act, NIS2, GDPR)"],
+   why:{da:"At forstå og omsætte krav fra AI Act, NIS2, GDPR og Cyber Resilience Act i praksis. AI Act art. 4 har siden februar 2025 forpligtet organisationer til at understøtte AI-færdigheder hos personalet, og Digital Omnibus fra 2026 bevarede pligten i blødere form. Halvdelen af de danske virksomheder, der overvejer AI, nævner regulatorisk usikkerhed som barriere (DST).",
+        en:"Understanding and applying requirements from the AI Act, NIS2, GDPR and the Cyber Resilience Act. AI Act Art. 4 has required organisations to support staff AI literacy since February 2025, and the 2026 Digital Omnibus kept the duty in softer form. Half of Danish companies considering AI cite regulatory uncertainty as a barrier (Statistics Denmark)."},
+   src:["aiact","omnibus","digst","dst","airad"]},
+  {id:"n4", kind:"new", c:"eth", x:8, y:62, p:"r",
+   name:{da:"Data- og AI-etik og digitale rettigheder", en:"Data and AI ethics, digital rights"},
+   da:["Data- og AI-etik,","digitale rettigheder"], en:["Data and AI ethics,","digital rights"],
+   why:{da:"Etisk dømmekraft om data, privatliv og automatiserede beslutninger samt kendskab til digitale rettigheder. DIGST nævner etiske færdigheder som én af tre typer AI-færdigheder, og DigComp 3.0 har digitale rettigheder, valg og ansvar som nyt tema. WEF's etik-kategori rummer kun miljø og globalt medborgerskab.",
+        en:"Ethical judgement about data, privacy and automated decisions, and knowledge of digital rights. The Danish Agency for Digital Government lists ethical skills as one of three types of AI literacy, and DigComp 3.0 adds digital rights, choice and responsibilities as a theme. WEF's ethics category holds only environment and global citizenship."},
+   src:["digst","digcomp","airad"]},
+  {id:"n5", kind:"new", c:"cog", x:30, y:66, p:"b",
+   name:{da:"Kildekritik og informationsintegritet", en:"Source criticism and information integrity"},
+   da:["Kildekritik og","informationsintegritet"], en:["Source criticism and","information integrity"],
+   why:{da:"At vurdere kilder, opdage manipuleret indhold og modstå mis- og desinformation, også når indholdet er AI-genereret. DigComp 3.0 har det som ét af fem nye gennemgående temaer, og det svenske AI-råd fremhæver kildesporbarhed.",
+        en:"Assessing sources, spotting manipulated content and resisting mis- and disinformation, including AI-generated content. DigComp 3.0 makes it one of five new cross-cutting themes, and the Swedish AI council highlights source traceability."},
+   src:["digcomp","airad"]},
+  {id:"n6", kind:"new", c:"cog", x:60, y:86, p:"r",
+   name:{da:"Domæneekspertise i samspil med AI", en:"Domain expertise combined with AI"},
+   da:["Domæneekspertise i","samspil med AI"], en:["Domain expertise","combined with AI"],
+   why:{da:"Dyb faglig viden kombineret med digitale færdigheder. Den norske rapport kalder det \"muliggørende kompetencer\" og ser dem som afgørende for, at teknologien skaber værdi. Aarhus Universitets opsamling viser, at AI især ændrer opgaverne i eksisterende job, hvilket gør fagligheden vigtigere.",
+        en:"Deep professional knowledge combined with digital skills. The Norwegian report calls these \"enabling competences\" and sees them as decisive for technology creating value. Aarhus University's review finds AI mainly changes tasks within existing jobs, which makes expertise more important."},
+   src:["kbu","cefau"]},
+  {id:"n7", kind:"new", c:"eth", x:6, y:86, p:"r",
+   name:{da:"Digital suverænitet og leverandørrisiko", en:"Digital sovereignty and supplier risk"},
+   da:["Digital suverænitet og","leverandørrisiko"], en:["Digital sovereignty","and supplier risk"],
+   why:{da:"At kunne vurdere afhængighed af leverandører, platforme og jurisdiktioner. Den norske kompetencebehovsrapport gør styrket digital suverænitet til ét af tre overordnede mål. WEF nævner geoøkonomisk fragmentering som drivkraft, men omsætter det ikke til en kompetence.",
+        en:"Assessing dependence on suppliers, platforms and jurisdictions. The Norwegian competence needs report makes stronger digital sovereignty one of three overarching goals. WEF names geoeconomic fragmentation as a driver but does not turn it into a skill."},
+   src:["kbu","wef"]},
+  {id:"m3", kind:"move", ref:"net", c:"tec", x:27, y:80, p:"l", dy:-8,
+   name:{da:"Netværk og cybersikkerhed (specialist)", en:"Networks and cybersecurity (specialist)"},
+   da:["Netværk og","cybersikkerhed"], en:["Networks and","cybersecurity"],
+   why:{da:"Flyttet op og mod kernen. Over halvdelen af de virksomheder, der søger cyberfolk, har svært ved at finde dem (Eurobarometer), og ENISA kalder styrkelsen af cyber-arbejdsstyrken en kritisk prioritet. Med NIS2 bliver specialistkompetencen kerne for langt flere organisationer.",
+        en:"Moved up and towards the core. More than half of companies seeking cyber staff struggle to find them (Eurobarometer), and ENISA calls strengthening the cyber workforce a critical priority. With NIS2 the specialist skill becomes core for many more organisations."},
+   src:["eurobaro","enisa"]},
+  {id:"m2", kind:"move", ref:"rwm", c:"cog", x:44, y:54, p:"r",
+   name:{da:"Læsning, skrivning og matematik", en:"Reading, writing and mathematics"},
+   da:["Læsning, skrivning","og matematik"], en:["Reading, writing","and mathematics"],
+   why:{da:"Flyttet fra \"uden for fokus\" til kernefeltet. EU's Union of Skills gør grundfærdigheder til topprioritet med mål om under 15 % lavtpræsterende i 2030. WEF-placeringen betyder kun, at arbejdsgiverne ikke forventer stigende brug, og grundfærdigheder er en forudsætning for at kunne vurdere AI-output.",
+        en:"Moved from \"out of focus\" to the core. The EU's Union of Skills makes basic skills a top priority, targeting under 15% low achievers by 2030. WEF's placement only means employers do not expect increasing use, and basic skills are a precondition for judging AI output."},
+   src:["union","wef"]},
+  {id:"m1", kind:"move", ref:"prog", c:"tec", x:22, y:56, p:"l",
+   name:{da:"Programmering (kodeforståelse og review)", en:"Programming (code literacy and review)"},
+   da:["Programmering","(kode-review)"], en:["Programming","(code review)"],
+   why:{da:"Flyttet op som kodeforståelse og review. Danske virksomheder, især SMV'er, har svært ved at rekruttere IKT-specialister (Digital Decade), og den norske rapport peger på IT-specialister som den mest kritiske mangel. Når mere kode genereres af AI, bliver evnen til at læse, vurdere og sikre koden vigtigere, selv om skrivningen automatiseres.",
+        en:"Moved up as code literacy and review. Danish companies, especially SMEs, struggle to recruit ICT specialists (Digital Decade), and the Norwegian report names IT specialists the most critical shortage. As more code is AI-generated, reading, assessing and securing code matters more even as writing it is automated."},
+   src:["dd","kbu"]},
+  {id:"m4", kind:"move", ref:"man", c:"phy", x:18, y:42, p:"r",
+   name:{da:"Fingerfærdighed (faglært præcision)", en:"Manual dexterity (skilled-trade precision)"},
+   da:["Fingerfærdighed","(faglært præcision)"], en:["Manual dexterity","(skilled precision)"],
+   why:{da:"Flyttet op som faglært præcision. Klimarådets review forventer, at efterspørgslen efter elektrikere stiger ca. 17 % frem mod 2030, og at mangel på faglærte kan bremse klimamålene. WEF noterer selv, at voksende job kræver højere manuel præcision.",
+        en:"Moved up as skilled-trade precision. The Danish Climate Council's review expects demand for electricians to rise about 17% by 2030 and warns that skilled-labour shortages could slow climate targets. WEF itself notes that growing jobs require higher manual proficiency."},
+   src:["klima","wef"]}
+];
+/* ---------- Zealand Videndag 2026: workshoppens kompetencer og placeringer ---------- */
+const VIDENDAG = [
+  {id:"v1",  name:"Samhørighed", cat0:"wwo", x:12, y:75, note:""},
+  {id:"v2",  name:"Situationsfornemmelse", cat0:"wwo", x:8, y:63, note:""},
+  {id:"v3",  name:"Sanselighed", cat0:"wwo", x:8, y:67, note:""},
+  {id:"v4",  name:"Filosofi (Kærlighed til visdom)", cat0:"wwo", x:49, y:71, note:""},
+  {id:"v5",  name:"Regenerativ tænkning", cat0:"wwo", x:24, y:74, note:"Permakultur"},
+  {id:"v6",  name:"Planetære mål", cat0:"own", x:26, y:79, note:""},
+  {id:"v7",  name:"Samskabelse / togetherness", cat0:"wwo", x:9, y:84, note:""},
+  {id:"v8",  name:"Etiske fordring", cat0:"eth", x:47, y:81, note:""},
+  {id:"v9",  name:"Analogisering", cat0:"tec", x:13, y:55, note:""},
+  {id:"v10", name:"Slow & fast & flow", cat0:"eth", x:53, y:62, note:""},
+  {id:"v11", name:"Nøjsom / sparsom", cat0:"tec", x:26, y:60, note:""},
+  {id:"v12", name:"Humanisme", cat0:"tec", x:29, y:83, note:""}
+].map(v=>Object.assign({c:"vid"}, v));
+const MOVED = new Set(DKEU.filter(d=>d.kind==="move").map(d=>d.ref));
+
+/* ---------- Tekster ---------- */
+const T = {
+  da:{
+    steps:{wef:["World Economic Forum skills","Global arbejdsgiversurvey 2025"],
+           dkeu:["Kompetencer som efterlyses i DK/EU","Danske, nordiske og EU-kilder"],
+           vid:["Diskuterede kompetencer, Zealand Videndag 2026","Workshoppens placeringer"],
+           own:["Officielle strategiske indsatser på Zealand","Under udvikling"]},
+    intro:"Figuren bygger på anerkendte offentlige kilder, som kan sammenholdes med diskussionerne på Zealands workshop. Følg de fire trin fra den globale arbejdsgiversurvey over de kompetencer, der efterlyses i Danmark og EU, til det, vi selv diskuterede på Videndag 2026, og videre til Zealands egne strategiske indsatser.",
+    eyebrow:"Zealand · Kernekompetencer i 2030 · Grundlag: WEF Future of Jobs Report 2025, figur 3.6",
+    title:'<span>Kernekompetencer</span> i 2030', titlePlain:"Kernekompetencer i 2030",
+    lead:{
+      wef:"Hvilke kompetencer er kerne i dag, og hvilke forventer arbejdsgiverne vil vokse frem mod 2030? Figuren bygger på svar fra over 1.000 arbejdsgivere i 55 økonomier.",
+      dkeu:"Samme figur set gennem danske, nordiske og europæiske kilder. Syv kompetencer, som WEF ikke har med, er tilføjet, og fire er flyttet. De nye placeringer er kvalitative vurderinger, ikke surveydata.",
+      vid:"De kompetencer, deltagerne diskuterede og placerede på workshoppen på Zealand Videndag 2026. WEF og DK/EU ligger nedtonet i baggrunden og kan hentes frem. Placeringerne er workshoppens egne vurderinger, ikke surveydata.",
+      own:"Her formuleres Zealands officielle strategiske indsatser, mens de er under udvikling. Placér dem i forhold til WEF, DK/EU og Videndagens kompetencer, som ligger nedtonet i baggrunden. Klik i figuren for at vælge en placering, træk i punkterne for at flytte dem. Alt gemmes kun i denne browser."},
+    x:"Andel arbejdsgivere, der betragter kompetencen som kerne i 2025 (%)",
+    y:"Andel, der forventer stigende brug frem mod 2030 (%)",
+    q:{core:["Kernekompetencer (2030)","Kerne nu og vokser i betydning"],
+       emerging:["Fremvoksende","Mindre central nu, men forventes at vokse"],
+       steady:["Stabile","Kerne nu, men forventes ikke at vokse"],
+       outfocus:["Uden for fokus","Mindre central nu og forventes ikke at vokse"]},
+    labels:"Etiketter", bgWef:"Fremhæv WEF", bgDk:"Fremhæv DK/EU", bgVid:"Fremhæv Videndag", reset:"Nulstil fokus", png:"Hent PNG",
+    hint:{wef:"Klik på en kategori eller et kvadrant for at fremhæve. Hold over eller tryk på et punkt for detaljer.",
+          dkeu:"Klik på et punkt for begrundelse og kilder. WEF-punkterne er nedtonet; hold over dem for at se værdierne.",
+          vid:"Klik på et punkt for detaljer. Hold over de nedtonede punkter, eller brug Fremhæv WEF og Fremhæv DK/EU.",
+          own:"Klik et tomt sted i figuren for at sætte placering i formularen. Træk i jeres punkter for at flytte dem. Hold over eller klik på de nedtonede punkter, eller brug knapperne til at fremhæve et lag."},
+    mk:{wef:"WEF-placering", wefDim:"WEF (nedtonet)", nw:"Tilføjet (DK/EU)", mv:"Flyttet (DK/EU)", own:"Strategisk indsats", vid:"Videndag 2026"},
+    tt2025:"Kerne i 2025", tt2030:"Forventer stigning", est:"vurderet",
+    tagNew:"Tilføjet", tagMove:"Flyttet", tagOwn:"Indsats", tagVid:"Videndag 2026", from:"fra", to:"til",
+    tableTitle:"Alle 26 WEF-kompetencer", cols:["Kompetence","2025","2030","Kvadrant"],
+    dkeuTitle:"Tilføjelser og flytninger", blindTitle:"Hvad DK/EU-perspektivet selv overser",
+    blind:["<b>Normativt, ikke målt.</b> DigComp, GreenComp og Union of Skills beskriver, hvad borgere bør kunne. WEF måler, hvad arbejdsgivere siger, de efterspørger.",
+           "<b>Politisk bevægeligt.</b> Blødgørelsen af AI Act art. 4 i Digital Omnibus viser, at regulatoriske krav kan ændre sig hurtigt.",
+           "<b>Relationelle kompetencer underbelyses.</b> EU-rammeværkerne siger mindre om ledelse, empati og samarbejde, som både WEF og OECD fremhæver."],
+    vidTitle:"Diskuterede kompetencer, Zealand Videndag 2026", vidMethod:"Kompetencerne og deres placering er formuleret af deltagerne på workshoppen og importeret fra workshoppens eksport. Akserne er WEF's, så placeringerne viser workshoppens vurdering af, hvor central kompetencen er i dag, og hvor meget den vil vokse.",
+    vidSrcTitle:"Om Videndag-laget", vidSrcBody:"<p><strong>Kilde:</strong> Zealand Videndag 2026, workshop om kernekompetencer i 2030 (oktober 2026). Kompetencer og placeringer er formuleret af deltagerne.</p><p>Navne på de enkelte bidragydere er udeladt i den offentlige version.</p>",
+    seed:"Hent Videndagens kompetencer som udgangspunkt", seeded:"Videndagens kompetencer er hentet ind og kan nu redigeres.",
+    detailDefault:{vid:"<b>Vælg et punkt.</b> Klik på en af Videndagens kompetencer i figuren eller på listen.", dkeu:"<b>Vælg et punkt.</b> Klik på et tilføjet eller flyttet punkt i figuren eller på listen for at se begrundelsen og kilderne.",
+                   own:"<b>Ingen valgt.</b> Klik på en af jeres indsatser for at se eller redigere den, eller på et nedtonet punkt for at se WEF- eller DK/EU-placeringen."},
+    srcTitle:"Kilde og metode",
+    copy:"Kopiér kildeangivelse", copied:"Kopieret",
+    srcBody:`<p><strong>Data:</strong> World Economic Forum (2025). <em>The Future of Jobs Report 2025</em>, kapitel 3, figur 3.6 «Core skills in 2030». Genève: World Economic Forum. Udgivet 7. januar 2025.</p>
+      <p><strong>Grafisk forlæg:</strong> Adam Danyal og Julia Danyal, AIForLeaders.com.</p>`,
+    note:`Placeringerne er aflæst fra figuren og afrundet til hele procent (usikkerhed ca. ±2 procentpoint). Analytisk tænkning (ca. 70 %), robusthed (67 %), nysgerrighed (50 %) og miljøansvar (ca. 20 %) er afstemt med de tal, rapportens tekst oplyser. Eksakte værdier findes i WEF's <a href="${EXPLORER_URL}" target="_blank" rel="noopener">Data Explorer</a>.`,
+    apa:`World Economic Forum. (2025). The Future of Jobs Report 2025 (Figur 3.6: Core skills in 2030). ${WEF_URL}. Grafisk forlæg: A. Danyal og J. Danyal, AIForLeaders.com.`,
+    dkeuSrcTitle:"Kilder til DK/EU-laget",
+    dkeuSrcIntro:"De tilføjede og flyttede punkter er kvalitative vurderinger baseret på kilderne herunder. Akserne er stadig WEF's, så placeringerne viser retning og relativ vægt, ikke målte andele.",
+    groups:{dk:"Danmark", nord:"Norden", eu:"EU", glob:"Globalt"},
+    ownTitle:"Officielle strategiske indsatser på Zealand (under udvikling)", fName:"Indsats", fCat:"Kategori", fX:"Kerne i dag (%)", fY:"Forventet stigning (%)", fNote:"Note (valgfri)",
+    add:"Tilføj", save:"Gem ændringer", cancel:"Annullér", edit:"Redigér", del:"Slet",
+    mail:"Send som mail", exp:"Eksportér JSON", imp:"Importér JSON", clear:"Ryd alle",
+    confirmClear:"Slet alle indsatser i denne browser?", confirmDel:"Slet denne indsats?",
+    none:"Ingen indsatser endnu. Klik i figuren eller udfyld formularen.",
+    storeOff:"Browseren tillader ikke lokal lagring her, så listen forsvinder, når siden lukkes. Brug Eksportér JSON eller Send som mail for at gemme.",
+    importBad:"Filen kunne ikke læses som en liste af indsatser.",
+    ownSrcTitle:"Om dine data",
+    ownSrcBody:`<p>Jeres indsatser gemmes kun i denne browser på denne enhed. Intet sendes nogen steder hen, før du selv vælger Send som mail eller Eksportér.</p>
+      <p><strong>Send som mail</strong> åbner dit mailprogram med listen i brødteksten. <strong>Eksportér JSON</strong> giver en fil, som kollegaer eller studerende kan importere.</p>`,
+    mailSubject:"Vores indsatser på Zealand: placering i forhold til kernekompetencer 2030",
+    mailIntro:"Vores indsatser på Zealand, placeret i forhold til WEF, The Future of Jobs Report 2025, figur 3.6 (Core skills in 2030).\nx = andel der anser kompetencen som kerne i dag (%), y = forventet stigning frem mod 2030 (%).",
+    mailCut:"(Listen er forkortet. Brug Eksportér JSON for den fulde liste.)",
+    expSub:{dkeu:"Tilføjede og flyttede kompetencer er vurderede placeringer baseret på danske, nordiske og europæiske kilder.",
+            vid:"Kompetencer diskuteret på Zealand Videndag 2026, placeret af deltagerne oven på WEF-figuren og DK/EU-blikket.",
+            own:"Zealands strategiske indsatser (under udvikling), placeret oven på WEF, DK/EU og Videndag 2026."},
+    exp1:"Kilde: World Economic Forum (2025). The Future of Jobs Report 2025, figur 3.6. weforum.org",
+    exp2:"Grafisk forlæg: Adam Danyal og Julia Danyal, AIForLeaders.com. Værdier aflæst fra figuren og afrundet (±2 procentpoint).",
+    exp4:"Videndag: Zealand Videndag 2026, workshop om kernekompetencer i 2030. Placeringer sat af deltagerne.",
+    titleSuffix:{wef:"", dkeu:": efterlyst i DK/EU", vid:": Zealand Videndag 2026", own:": Zealands indsatser"},
+    exp3:"DK/EU-kilder: DigComp 3.0, AI Act art. 4, Union of Skills, Eurobarometer, ENISA, DIGST, DST, PwC, Klimarådet, Kompetansebehovsutvalget, AI-rådet (SE)."
+  },
+  en:{
+    steps:{wef:["World Economic Forum skills","Global employer survey 2025"],
+           dkeu:["Skills in demand in DK/EU","Danish, Nordic and EU sources"],
+           vid:["Skills discussed, Zealand Knowledge Day 2026","Workshop positions"],
+           own:["Official strategic priorities at Zealand","In development"]},
+    intro:"The figure is built on recognised public sources that can be compared with the discussions at Zealand's workshop. Follow the four steps from the global employer survey, through the skills in demand in Denmark and the EU, to what we discussed at Knowledge Day 2026, and on to Zealand's own strategic priorities.",
+    eyebrow:"Zealand · Core skills in 2030 · Based on WEF Future of Jobs Report 2025, figure 3.6",
+    title:'<span>Core skills</span> in 2030', titlePlain:"Core skills in 2030",
+    lead:{
+      wef:"Which skills are core today, and which do employers expect to grow by 2030? The figure is based on responses from more than 1,000 employers across 55 economies.",
+      dkeu:"The same figure seen through Danish, Nordic and European sources. Seven skills WEF leaves out are added and four are moved. The new positions are qualitative assessments, not survey data.",
+      vid:"The skills participants discussed and positioned at the workshop on Zealand Knowledge Day 2026. WEF and DK/EU sit dimmed in the background and can be brought forward. Positions are the workshop's own assessments, not survey data.",
+      own:"This is where Zealand's official strategic priorities take shape while in development. Place them against WEF, DK/EU and the Knowledge Day skills, which sit dimmed in the background. Click in the chart to pick a position, drag points to move them. Everything is stored only in this browser."},
+    x:"Share of employers considering it a core skill in 2025 (%)",
+    y:"Share of employers expecting increasing use by 2030 (%)",
+    q:{core:["Core skills (2030)","Core now and expected to increase in importance"],
+       emerging:["Emerging skills","Less essential now, but expected to increase in use"],
+       steady:["Steady skills","Core now, but not expected to increase in use"],
+       outfocus:["Out-of-focus skills","Less essential now, and not expected to increase"]},
+    labels:"Labels", bgWef:"Highlight WEF", bgDk:"Highlight DK/EU", bgVid:"Highlight Knowledge Day", reset:"Clear focus", png:"Download PNG",
+    hint:{wef:"Click a category or a quadrant to highlight it. Hover or tap a point for details.",
+          dkeu:"Click a point for rationale and sources. WEF points are dimmed; hover them to see values.",
+          vid:"Click a point for details. Hover the dimmed points, or use Highlight WEF and Highlight DK/EU.",
+          own:"Click an empty spot in the chart to set the position in the form. Drag your points to move them. Hover or click the dimmed points, or use the buttons to highlight a layer."},
+    mk:{wef:"WEF position", wefDim:"WEF (dimmed)", nw:"Added (DK/EU)", mv:"Moved (DK/EU)", own:"Strategic priority", vid:"Knowledge Day 2026"},
+    tt2025:"Core in 2025", tt2030:"Expect increase", est:"assessed",
+    tagNew:"Added", tagMove:"Moved", tagOwn:"Priority", tagVid:"Knowledge Day 2026", from:"from", to:"to",
+    tableTitle:"All 26 WEF skills", cols:["Skill","2025","2030","Quadrant"],
+    dkeuTitle:"Additions and moves", blindTitle:"What the DK/EU lens misses",
+    blind:["<b>Normative, not measured.</b> DigComp, GreenComp and the Union of Skills describe what citizens should be able to do. WEF measures what employers say they demand.",
+           "<b>Politically mobile.</b> The softening of AI Act Art. 4 in the Digital Omnibus shows regulatory requirements can change quickly.",
+           "<b>Relational skills under-covered.</b> EU frameworks say less about leadership, empathy and collaboration, which both WEF and the OECD emphasise."],
+    vidTitle:"Skills discussed, Zealand Knowledge Day 2026", vidMethod:"The skills and their positions were formulated by participants at the workshop and imported from the workshop export. The axes are WEF's, so positions show the workshop's view of how core each skill is today and how much it will grow.",
+    vidSrcTitle:"About the Knowledge Day layer", vidSrcBody:"<p><strong>Source:</strong> Zealand Knowledge Day 2026, workshop on core skills in 2030 (October 2026). Skills and positions were formulated by participants.</p><p>Names of individual contributors are left out of the public version.</p>",
+    seed:"Load the Knowledge Day skills as a starting point", seeded:"The Knowledge Day skills are loaded and can now be edited.",
+    detailDefault:{vid:"<b>Pick a point.</b> Click one of the Knowledge Day skills in the chart or the list.", dkeu:"<b>Pick a point.</b> Click an added or moved point in the chart or the list to see the rationale and sources.",
+                   own:"<b>Nothing selected.</b> Click one of your priorities to view or edit it, or a dimmed point to see the WEF or DK/EU position."},
+    srcTitle:"Source and method",
+    copy:"Copy citation", copied:"Copied",
+    srcBody:`<p><strong>Data:</strong> World Economic Forum (2025). <em>The Future of Jobs Report 2025</em>, chapter 3, figure 3.6 "Core skills in 2030". Geneva: World Economic Forum. Published 7 January 2025.</p>
+      <p><strong>Graphic adapted from:</strong> Adam Danyal and Julia Danyal, AIForLeaders.com.</p>`,
+    note:`Positions are read from the figure and rounded to whole percentages (uncertainty approx. ±2 percentage points). Analytical thinking (approx. 70%), resilience (67%), curiosity (50%) and environmental stewardship (approx. 20%) are aligned with figures stated in the report text. Exact values are available in the WEF <a href="${EXPLORER_URL}" target="_blank" rel="noopener">Data Explorer</a>.`,
+    apa:`World Economic Forum. (2025). The Future of Jobs Report 2025 (Figure 3.6: Core skills in 2030). ${WEF_URL}. Graphic adapted from A. Danyal and J. Danyal, AIForLeaders.com.`,
+    dkeuSrcTitle:"Sources for the DK/EU layer",
+    dkeuSrcIntro:"Added and moved points are qualitative assessments based on the sources below. The axes remain WEF's, so positions show direction and relative weight, not measured shares.",
+    groups:{dk:"Denmark", nord:"Nordics", eu:"EU", glob:"Global"},
+    ownTitle:"Official strategic priorities at Zealand (in development)", fName:"Priority", fCat:"Category", fX:"Core today (%)", fY:"Expected increase (%)", fNote:"Note (optional)",
+    add:"Add", save:"Save changes", cancel:"Cancel", edit:"Edit", del:"Delete",
+    mail:"Send by email", exp:"Export JSON", imp:"Import JSON", clear:"Clear all",
+    confirmClear:"Delete all priorities in this browser?", confirmDel:"Delete this priority?",
+    none:"No priorities yet. Click in the chart or fill in the form.",
+    storeOff:"This browser does not allow local storage here, so the list disappears when the page closes. Use Export JSON or Send by email to keep it.",
+    importBad:"The file could not be read as a list of priorities.",
+    ownSrcTitle:"About your data",
+    ownSrcBody:`<p>Your priorities are stored only in this browser on this device. Nothing is sent anywhere until you choose Send by email or Export.</p>
+      <p><strong>Send by email</strong> opens your mail app with the list in the body. <strong>Export JSON</strong> gives a file colleagues or students can import.</p>`,
+    mailSubject:"Our priorities at Zealand: positions against core skills 2030",
+    mailIntro:"Our priorities at Zealand, positioned relative to WEF, The Future of Jobs Report 2025, figure 3.6 (Core skills in 2030).\nx = share considering it core today (%), y = expected increase by 2030 (%).",
+    mailCut:"(List shortened. Use Export JSON for the full list.)",
+    expSub:{dkeu:"Added and moved skills are assessed positions based on Danish, Nordic and European sources.",
+            vid:"Skills discussed at Zealand Knowledge Day 2026, positioned by participants on top of the WEF figure and the DK/EU lens.",
+            own:"Zealand's strategic priorities (in development), placed on top of WEF, DK/EU and Knowledge Day 2026."},
+    exp1:"Source: World Economic Forum (2025). The Future of Jobs Report 2025, figure 3.6. weforum.org",
+    exp2:"Graphic adapted from Adam Danyal and Julia Danyal, AIForLeaders.com. Values read from the figure and rounded (±2 percentage points).",
+    exp4:"Knowledge Day: Zealand Knowledge Day 2026, workshop on core skills in 2030. Positions set by participants.",
+    titleSuffix:{wef:"", dkeu:": in demand in DK/EU", vid:": Zealand Knowledge Day 2026", own:": Zealand priorities"},
+    exp3:"DK/EU sources: DigComp 3.0, AI Act Art. 4, Union of Skills, Eurobarometer, ENISA, DIGST, Statistics Denmark, PwC, Danish Climate Council, Kompetansebehovsutvalget, AI council (SE)."
+  }
+};
+
+const THEMES = {
+  light:{card:"#FFFFFF",ink:"#000000",muted:"#5C5C5C",grid:"#E6E6E8",div:"#000000",qCore:"#FFF9C4",qEm:"#F6F6F7",qSt:"#F6F6F7",qOut:"#FBFBFB",coreTitle:"#000000",stroke:"#FFFFFF",arrow:"#8C8C8C",hl:"#FFF387"},
+  dark:{card:"#111111",ink:"#FFFFFF",muted:"#A3A3A3",grid:"#262626",div:"#D9D9D9",qCore:"#24220F",qEm:"#171717",qSt:"#171717",qOut:"#131313",coreTitle:"#FFF387",stroke:"#111111",arrow:"#7A7A7A",hl:"#FFF387"}
+};
+
+/* ---------- Tilstand og lagring ---------- */
+const LS = "coreskills2030:v1";
+let storageOK = true;
+function load(){ try{ const raw = localStorage.getItem(LS); return raw ? JSON.parse(raw) : {}; }catch(_){ storageOK=false; return {}; } }
+function persist(){ try{ localStorage.setItem(LS, JSON.stringify({mode:state.mode, lang:state.lang, own:state.own})); storageOK=true; }catch(_){ storageOK=false; } }
+const saved = load();
+const state = {
+  mode: ["wef","dkeu","vid","own"].includes(saved.mode) ? saved.mode : "wef",
+  lang: saved.lang==="en" ? "en" : "da",
+  own: Array.isArray(saved.own) ? saved.own.filter(validOwn) : [],
+  labels:true, bgWef:false, bgDk:false, bgVid:false, focus:null, sort:{k:"y",dir:-1}, pinned:null, sel:null, editing:null
+};
+function validOwn(o){ return o && typeof o.name==="string" && o.name.trim() && isFinite(o.x) && isFinite(o.y); }
+
+const root = document.documentElement;
+const mq = matchMedia("(prefers-color-scheme: dark)");
+const isDark = () => root.dataset.theme ? root.dataset.theme==="dark" : mq.matches;
+const esc = s => String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const T_ = () => T[state.lang];
+
+/* ---------- Geometri ---------- */
+const X0=90, X1=960, Y0=40, Y1=640, XMAX=80, YMAX=100;
+const px = x => X0 + x*(X1-X0)/XMAX;
+const py = y => Y1 - y*(Y1-Y0)/YMAX;
+const ux = sx => Math.max(0, Math.min(XMAX, (sx-X0)*XMAX/(X1-X0)));
+const uy = sy => Math.max(0, Math.min(YMAX, (Y1-sy)*YMAX/(Y1-Y0)));
+const quad = d => d.x>=40 ? (d.y>=50?"core":"steady") : (d.y>=50?"emerging":"outfocus");
+const color = (c, dark) => catOf(c)[dark?"d":"l"];
+const matches = d => !state.focus || (state.focus.t==="cat" ? d.c===state.focus.v : quad(d)===state.focus.v);
+const nameOf = (d, lang) => d.name ? (typeof d.name==="string" ? d.name : d.name[lang]) : d[lang].join(" ").replace(/-\s/g,"");
+const layered = () => state.mode==="vid" || state.mode==="own";
+const showDkeu = () => state.mode!=="wef";
+const dkDim = () => layered() && !state.bgDk;
+const showVid = () => layered();
+const vidDim = () => state.mode==="own" && !state.bgVid;
+
+function labelPos(cx, cy, p, n, dx, dy){
+  let lx, ly, a;
+  if(p==="r"){lx=cx+14; ly=cy+4-(n-1)*7; a="start";}
+  else if(p==="l"){lx=cx-14; ly=cy+4-(n-1)*7; a="end";}
+  else if(p==="t"){lx=cx; ly=cy-15-(n-1)*14; a="middle";}
+  else {lx=cx; ly=cy+25; a="middle";}
+  return {lx:lx+(dx||0), ly:ly+(dy||0), a};
+}
+function textBlock(lines, lx, ly, a, th, weight){
+  let s = `<text x="${lx}" y="${ly}" font-size="12.5" font-weight="${weight||500}" fill="${th.ink}" text-anchor="${a}" paint-order="stroke" stroke="${th.halo}" stroke-width="3" stroke-linejoin="round">`;
+  lines.forEach((l,i)=> s += `<tspan x="${lx}" dy="${i?14:0}">${esc(l)}</tspan>`);
+  return s + `</text>`;
+}
+function hexagon(cx, cy, r){ let d=""; for(let i=0;i<6;i++){ const a=Math.PI/3*i - Math.PI/2; d += (i?"L":"M")+(cx+r*Math.cos(a)).toFixed(1)+" "+(cy+r*Math.sin(a)).toFixed(1)+" "; } return d+"Z"; }
+function diamond(cx, cy, r){ return `M${cx} ${cy-r} L${cx+r} ${cy} L${cx} ${cy+r} L${cx-r} ${cy} Z`; }
+function wrapName(name){
+  const words = String(name).split(/\s+/); const lines=[]; let cur="";
+  words.forEach(w=>{ if((cur+" "+w).trim().length>20 && cur){ lines.push(cur); cur=w; } else cur=(cur+" "+w).trim(); });
+  if(cur) lines.push(cur);
+  return lines.slice(0,3);
+}
+
+/* ---------- Figur ---------- */
+function chartMarkup(thBase, dark, lang, opts){
+  const th = Object.assign({halo: thBase.card}, thBase);
+  const t = T[lang], mode = state.mode; let s = "";
+  const mx = px(40), my = py(50);
+  const qs = [
+    {k:"emerging",x:X0,y:Y0,w:mx-X0,h:my-Y0,f:th.qEm,tx:(X0+mx)/2,ty:Y0+32},
+    {k:"core",x:mx,y:Y0,w:X1-mx,h:my-Y0,f:th.qCore,tx:(mx+X1)/2,ty:Y0+32},
+    {k:"outfocus",x:X0,y:my,w:mx-X0,h:Y1-my,f:th.qOut,tx:(X0+mx)/2,ty:Y1-42},
+    {k:"steady",x:mx,y:my,w:X1-mx,h:Y1-my,f:th.qSt,tx:(mx+X1)/2,ty:Y1-42}
+  ];
+  s += `<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="${th.arrow}"/></marker></defs>`;
+  qs.forEach(q=>{
+    const dim = state.focus && state.focus.t==="q" && state.focus.v!==q.k;
+    s += `<rect data-q="${q.k}" class="qbg" x="${q.x}" y="${q.y}" width="${q.w}" height="${q.h}" fill="${q.f}" opacity="${dim?0.45:1}"/>`;
+  });
+  for(let v=10; v<XMAX; v+=10){ if(v!==40) s+=`<line x1="${px(v)}" y1="${Y0}" x2="${px(v)}" y2="${Y1}" stroke="${th.grid}" stroke-dasharray="3 4" pointer-events="none"/>`; }
+  for(let v=10; v<YMAX; v+=10){ if(v!==50) s+=`<line x1="${X0}" y1="${py(v)}" x2="${X1}" y2="${py(v)}" stroke="${th.grid}" stroke-dasharray="3 4" pointer-events="none"/>`; }
+  s += `<g pointer-events="none"><line x1="${mx}" y1="${Y0}" x2="${mx}" y2="${Y1}" stroke="${th.div}" stroke-width="1.6"/>`;
+  s += `<line x1="${X0}" y1="${my}" x2="${X1}" y2="${my}" stroke="${th.div}" stroke-width="1.6"/>`;
+  s += `<rect x="${X0}" y="${Y0}" width="${X1-X0}" height="${Y1-Y0}" fill="none" stroke="${th.div}" stroke-width="1.6"/>`;
+  for(let v=0; v<=XMAX; v+=10) s+=`<text x="${px(v)}" y="${Y1+22}" font-size="12" fill="${th.muted}" text-anchor="middle">${v}</text>`;
+  for(let v=0; v<=YMAX; v+=10) s+=`<text x="${X0-12}" y="${py(v)+4}" font-size="12" fill="${th.muted}" text-anchor="end">${v}</text>`;
+  s += `<text x="${(X0+X1)/2}" y="${Y1+52}" font-size="13.5" font-weight="600" fill="${th.ink}" text-anchor="middle">${esc(t.x)}</text>`;
+  s += `<text transform="translate(30 ${(Y0+Y1)/2}) rotate(-90)" font-size="13.5" font-weight="600" fill="${th.ink}" text-anchor="middle">${esc(t.y)}</text></g>`;
+  qs.forEach(q=>{
+    const [h,sub] = t.q[q.k];
+    const c = q.k==="core" ? th.coreTitle : th.ink;
+    s += `<g data-q="${q.k}" class="qtitle"><text x="${q.tx}" y="${q.ty}" font-family="Space Grotesk, Inter, sans-serif" font-size="18" font-weight="700" fill="${c}" text-anchor="middle">${esc(h)}</text>`;
+    s += `<text x="${q.tx}" y="${q.ty+19}" font-size="12.5" fill="${th.muted}" text-anchor="middle">${esc(sub)}</text></g>`;
+  });
+
+  const wefFull = mode==="wef" || (layered() && state.bgWef);
+  const dkd = dkDim();
+  const dk = showDkeu();
+
+  /* Pile for flyttede (under punkterne) */
+  if(dk){
+    DKEU.filter(d=>d.kind==="move").forEach(d=>{
+      const o = DATA.find(w=>w.id===d.ref); const op = (matches(d)?1:0.15) * (dkd?0.35:1);
+      const x1=px(o.x), y1=py(o.y), x2=px(d.x), y2=py(d.y), L=Math.hypot(x2-x1,y2-y1);
+      const k1 = 9/L, k2 = (L-13)/L;
+      s += `<line x1="${x1+(x2-x1)*k1}" y1="${y1+(y2-y1)*k1}" x2="${x1+(x2-x1)*k2}" y2="${y1+(y2-y1)*k2}" stroke="${th.arrow}" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#ah)" opacity="${op}" pointer-events="none"/>`;
+    });
+  }
+
+  /* WEF-punkter */
+  DATA.forEach(d=>{
+    const cx=px(d.x), cy=py(d.y);
+    const dimmed = !wefFull;
+    const op = matches(d) ? (dimmed ? (MOVED.has(d.id)&&dk ? 0.5 : 0.32) : 1) : 0.12;
+    const r = dimmed ? 5.5 : 8.5;
+    s += `<g class="pt${state.pinned==="w:"+d.id?" on":""}" data-k="w:${d.id}" opacity="${op}">`;
+    s += `<circle cx="${cx}" cy="${cy}" r="${dimmed?11:14}" fill="transparent"/>`;
+    s += `<circle class="mk" cx="${cx}" cy="${cy}" r="${r}" fill="${color(d.c,dark)}" stroke="${th.stroke}" stroke-width="2"/>`;
+    if(wefFull && state.labels){ const L = labelPos(cx,cy,d.p,d[lang].length,d.dx,d.dy); s += textBlock(d[lang], L.lx, L.ly, L.a, th); }
+    s += `</g>`;
+  });
+
+  /* DK/EU-punkter */
+  if(dk){
+    DKEU.forEach(d=>{
+      const cx=px(d.x), cy=py(d.y), op = (matches(d)?1:0.15) * (dkd?0.4:1), col=color(d.c,dark);
+      s += `<g class="pt${state.pinned==="d:"+d.id||state.sel==="d:"+d.id?" on":""}" data-k="d:${d.id}" opacity="${op}">`;
+      s += `<circle cx="${cx}" cy="${cy}" r="15" fill="transparent"/>`;
+      if(d.kind==="new") s += `<path class="mk" d="${diamond(cx,cy,dkd?7.5:10.5)}" fill="${col}" stroke="${th.stroke}" stroke-width="2" stroke-linejoin="round"/>`;
+      else s += `<circle class="mk" cx="${cx}" cy="${cy}" r="${dkd?5.5:8}" fill="${th.card}" stroke="${col}" stroke-width="${dkd?2.5:3.5}"/>`;
+      if(!dkd && (state.labels || state.mode==="dkeu")){ const L = labelPos(cx,cy,d.p,d[lang].length,d.dx,d.dy); s += textBlock(d[lang], L.lx, L.ly, L.a, th, 600); }
+      s += `</g>`;
+    });
+  }
+
+  /* Videndag-punkter */
+  if(showVid()){
+    const vd = vidDim();
+    VIDENDAG.forEach(v=>{
+      const cx=px(v.x), cy=py(v.y), op = (matches(v)?1:0.15) * (vd?0.45:1), lines=wrapName(v.name);
+      s += `<g class="pt${state.sel==="v:"+v.id?" on":""}" data-k="v:${v.id}" opacity="${op}">`;
+      s += `<circle cx="${cx}" cy="${cy}" r="15" fill="transparent"/>`;
+      s += `<path class="mk" d="${hexagon(cx,cy,vd?7:10.5)}" fill="${th.hl}" stroke="${dark?"#FFF387":"#000000"}" stroke-width="${vd?1.2:1.8}" stroke-linejoin="round"/>`;
+      if(!vd && state.labels){ const L = labelPos(cx,cy, v.x<62?"r":"l", lines.length); s += textBlock(lines, L.lx, L.ly, L.a, th, 600); }
+      s += `</g>`;
+    });
+  }
+
+  /* Egne punkter */
+  if(mode==="own"){
+    state.own.forEach(o=>{
+      const cx=px(o.x), cy=py(o.y), op = matches(o)?1:0.15, col=color(o.c,dark), lines=wrapName(o.name);
+      const rightSide = o.x < 62;
+      const L = labelPos(cx,cy, rightSide?"r":"l", lines.length);
+      s += `<g class="pt own${state.sel==="o:"+o.id?" on":""}" data-k="o:${o.id}" opacity="${op}">`;
+      s += `<circle cx="${cx}" cy="${cy}" r="16" fill="transparent"/>`;
+      s += `<rect class="mk" x="${cx-8.5}" y="${cy-8.5}" width="17" height="17" rx="4" fill="${col}" stroke="${th.stroke}" stroke-width="2"/>`;
+      s += textBlock(lines, L.lx, L.ly, L.a, th, 600);
+      s += `</g>`;
+    });
+  }
+  return s;
+}
+
+function renderChart(){
+  const dark = isDark(), th = THEMES[dark?"dark":"light"];
+  const el = document.getElementById("chart");
+  const old = el.querySelector("svg"); if(old) old.remove();
+  el.classList.toggle("placing", state.mode==="own");
+  el.insertAdjacentHTML("beforeend",
+    `<svg viewBox="0 0 1000 715" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(T_().titlePlain)}" font-family="Inter, 'Helvetica Neue', Arial, sans-serif">${chartMarkup(th,dark,state.lang)}</svg>`);
+}
+
+/* ---------- Forklaringer ---------- */
+function markerSvg(kind, col, card){
+  if(kind==="w") return `<svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="${col}"/></svg>`;
+  if(kind==="wd") return `<svg width="14" height="14"><circle cx="7" cy="7" r="4.5" fill="${col}" opacity=".35"/></svg>`;
+  if(kind==="n") return `<svg width="16" height="16"><path d="${diamond(8,8,7)}" fill="${col}"/></svg>`;
+  if(kind==="v") return `<svg width="16" height="16"><path d="${hexagon(8,8,7)}" fill="#FFF387" stroke="#000" stroke-width="1.3"/></svg>`;
+  if(kind==="m") return `<svg width="16" height="16"><circle cx="8" cy="8" r="5.5" fill="${card}" stroke="${col}" stroke-width="2.5"/></svg>`;
+  return `<svg width="16" height="16"><rect x="2" y="2" width="12" height="12" rx="3" fill="${col}"/></svg>`;
+}
+function renderLegend(){
+  const dark = isDark(), t=T_(), lg = document.getElementById("legend");
+  let html = Object.entries(CATS).map(([k,c])=>{
+    const on = state.focus && state.focus.t==="cat" && state.focus.v===k;
+    return `<button data-cat="${k}" aria-pressed="${!!on}"><span class="dot" style="background:${dark?c.d:c.l}"></span>${esc(c[state.lang])}</button>`;
+  }).join("");
+  lg.innerHTML = html;
+  const mk = document.getElementById("markers"), ink = dark?"#A3A3A3":"#5C5C5C", card = dark?"#111111":"#FFFFFF";
+  if(state.mode==="wef"){ mk.innerHTML=""; mk.hidden=true; return; }
+  mk.hidden=false;
+  const wefOn = layered() && state.bgWef, dim = dkDim() ? (state.lang==="da"?", nedtonet":", dimmed") : "";
+  let m = `<span>${markerSvg(wefOn?"w":"wd",ink,card)}${esc(wefOn?t.mk.wef:t.mk.wefDim)}</span>`;
+  if(showDkeu()) m += `<span>${markerSvg("n",ink,card)}${esc(t.mk.nw.replace(")", dim+")"))}</span><span>${markerSvg("m",ink,card)}${esc(t.mk.mv.replace(")", dim+")"))}</span>`;
+  if(showVid()) m += `<span>${markerSvg("v",ink,card)}${esc(t.mk.vid)}${vidDim()?(state.lang==="da"?" (nedtonet)":" (dimmed)"):""}</span>`;
+  if(state.mode==="own") m += `<span>${markerSvg("o",ink,card)}${esc(t.mk.own)}</span>`;
+  mk.innerHTML = m;
+}
+
+/* ---------- Venstre panel ---------- */
+function srcLinks(keys){ return `<div class="srcs">${keys.map(k=>`<a href="${SRC[k].u}" target="_blank" rel="noopener">${esc(SRC[k].t)}</a>`).join("")}</div>`; }
+function dkeuDetailHTML(d){
+  const t=T_(), lang=state.lang, dark=isDark();
+  let pos;
+  if(d.kind==="move"){ const o=DATA.find(w=>w.id===d.ref); pos = `${t.tagMove} ${t.from} ${o.x}/${o.y} ${t.to} ${d.x}/${d.y} (${t.est})`; }
+  else pos = `${t.tt2025} ${d.x} %, ${t.tt2030.toLowerCase()} ${d.y} % (${t.est})`;
+  return `<h3><span class="dot" style="background:${color(d.c,dark)}"></span>${esc(nameOf(d,lang))} <span class="tag ${d.kind==="new"?"new":"move"}">${d.kind==="new"?t.tagNew:t.tagMove}</span></h3>
+    <p class="note">${esc(pos)}</p><p>${esc(d.why[lang])}</p>${srcLinks(d.src)}`;
+}
+
+function renderLeft(){
+  const t=T_(), el=document.getElementById("left");
+  if(state.mode==="wef") return renderTable(el);
+  if(state.mode==="dkeu"){
+    const dark=isDark();
+    let h = `<h2>${t.dkeuTitle}</h2><div class="scroll">`;
+    DKEU.forEach(d=>{
+      h += `<div class="item${state.sel==="d:"+d.id?" sel":""}" data-item="${d.id}"><h4 data-pick="${d.id}">${markerSvg(d.kind==="new"?"n":"m", color(d.c,dark), dark?"#111111":"#FFFFFF")}${esc(nameOf(d,state.lang))} <span class="tag ${d.kind==="new"?"new":"move"}">${d.kind==="new"?t.tagNew:t.tagMove}</span></h4>
+        <p>${esc(d.why[state.lang])}</p>${srcLinks(d.src)}</div>`;
+    });
+    h += `</div><div class="blind"><h2>${t.blindTitle}</h2><ul>${t.blind.map(b=>`<li>${b}</li>`).join("")}</ul></div>`;
+    el.innerHTML = h;
+    return;
+  }
+  if(state.mode==="vid"){
+    let h = `<h2>${t.vidTitle}</h2><p class="note" style="margin-bottom:6px">${esc(t.vidMethod)}</p><div class="scroll">`;
+    VIDENDAG.slice().sort((a,b)=>b.y-a.y).forEach(v=>{
+      h += `<div class="item${state.sel==="v:"+v.id?" sel":""}" data-item="${v.id}"><h4 data-pickv="${v.id}">${markerSvg("v")}${esc(v.name)}</h4>
+        <p class="note">${t.tt2025} ${v.x} % · ${t.tt2030} ${v.y} % · ${esc(t.q[quad(v)][0])}${v.note?" · "+esc(v.note):""}</p></div>`;
+    });
+    el.innerHTML = h + `</div>`;
+    return;
+  }
+  renderOwnEditor(el);
+}
+
+function renderTable(el){
+  const t = T_(), dark = isDark(), {k,dir} = state.sort;
+  const rows = DATA.slice().sort((a,b)=>{
+    if(k==="n") return dir*nameOf(a,state.lang).localeCompare(nameOf(b,state.lang), state.lang);
+    if(k==="q") return dir*t.q[quad(a)][0].localeCompare(t.q[quad(b)][0], state.lang);
+    return dir*(a[k]-b[k]);
+  });
+  const arrow = key => key===k ? (dir>0?" ↑":" ↓") : "";
+  let h = `<h2>${t.tableTitle}</h2><div class="scroll"><table><thead><tr><th data-k="n">${t.cols[0]}${arrow("n")}</th><th class="num" data-k="x">${t.cols[1]}${arrow("x")}</th><th class="num" data-k="y">${t.cols[2]}${arrow("y")}</th><th data-k="q">${t.cols[3]}${arrow("q")}</th></tr></thead><tbody>`;
+  rows.forEach(d=>{
+    const q = quad(d);
+    h += `<tr style="opacity:${matches(d)?1:0.35}"><td><span class="dot" style="background:${color(d.c,dark)}"></span>${esc(nameOf(d,state.lang))}</td><td class="num">${d.x}</td><td class="num">${d.y}</td><td><span class="qtag ${q==="core"?"core":""}">${esc(t.q[q][0])}</span></td></tr>`;
+  });
+  el.innerHTML = h + "</tbody></table></div>";
+}
+
+const draft = {name:"", c:"own", x:40, y:50, note:""};
+function renderOwnEditor(el){
+  const t=T_(), dark=isDark(), editing = state.editing ? state.own.find(o=>o.id===state.editing) : null;
+  const f = editing || draft;
+  const opts = `<option value="own"${f.c==="own"?" selected":""}>${esc(OWN_CAT[state.lang])}</option>` +
+    Object.entries(CATS).map(([k,c])=>`<option value="${k}"${f.c===k?" selected":""}>${esc(c[state.lang])}</option>`).join("");
+  let h = `<h2>${t.ownTitle}</h2>`;
+  if(!storageOK) h += `<div class="banner">${esc(t.storeOff)}</div>`;
+  h += `<form id="ownForm" autocomplete="off">
+    <label class="full">${t.fName}<input id="fName" maxlength="80" required value="${esc(f.name)}"></label>
+    <label class="full">${t.fCat}<select id="fCat">${opts}</select></label>
+    <label>${t.fX}<span class="rangeRow"><input type="range" id="fXr" min="0" max="80" step="1" value="${f.x}"><input type="number" id="fX" min="0" max="80" step="1" value="${f.x}"></span></label>
+    <label>${t.fY}<span class="rangeRow"><input type="range" id="fYr" min="0" max="100" step="1" value="${f.y}"><input type="number" id="fY" min="0" max="100" step="1" value="${f.y}"></span></label>
+    <label class="full">${t.fNote}<textarea id="fNote" maxlength="400">${esc(f.note||"")}</textarea></label>
+    <div class="actions full"><button type="submit" class="primary">${editing?t.save:t.add}</button>${editing?`<button type="button" id="fCancel">${t.cancel}</button>`:""}</div>
+  </form><div class="scroll" style="max-height:320px">`;
+  if(!state.own.length) h += `<p class="empty">${esc(t.none)}</p><div class="actions" style="margin-bottom:8px"><button id="bSeed">${markerSvg("v")} ${esc(t.seed)}</button></div>`;
+  state.own.forEach(o=>{
+    h += `<div class="ownrow"><span class="dot" style="background:${color(o.c,dark)};border-radius:3px;margin-top:5px"></span>
+      <div class="meta"><b>${esc(o.name)}</b><span>${esc(catOf(o.c)[state.lang])} · ${o.x} / ${o.y}${o.note?" · "+esc(o.note):""}</span></div>
+      <div class="btns"><button data-edit="${o.id}">${t.edit}</button><button data-del="${o.id}">${t.del}</button></div></div>`;
+  });
+  h += `</div><div class="actions" style="margin-top:14px">
+    <button id="bMail" ${state.own.length?"":"disabled"}>✉ ${t.mail}</button>
+    <button id="bExp" ${state.own.length?"":"disabled"}>${t.exp}</button>
+    <button id="bImp">${t.imp}</button>
+    <button id="bClear" class="ghost" ${state.own.length?"":"disabled"}>${t.clear}</button>
+    <input type="file" id="fileImp" accept="application/json,.json" class="sr">
+  </div>`;
+  el.innerHTML = h;
+
+  const sync = (a,b)=>{ const A=document.getElementById(a), B=document.getElementById(b); A.oninput=()=>{B.value=A.value; mirror();}; B.oninput=()=>{A.value=B.value; mirror();}; };
+  const mirror = ()=>{ if(!state.editing){ draft.name=fName.value; draft.c=fCat.value; draft.x=+fX.value; draft.y=+fY.value; draft.note=fNote.value; } };
+  sync("fXr","fX"); sync("fYr","fY");
+  const fName=document.getElementById("fName"), fCat=document.getElementById("fCat"), fX=document.getElementById("fX"), fY=document.getElementById("fY"), fNote=document.getElementById("fNote");
+  [fName,fCat,fNote].forEach(i=>i.addEventListener("input",mirror));
+  document.getElementById("ownForm").onsubmit = e=>{
+    e.preventDefault();
+    const rec = {name:fName.value.trim(), c:fCat.value, x:clampN(fX.value,0,80), y:clampN(fY.value,0,100), note:fNote.value.trim()};
+    if(!rec.name) return fName.focus();
+    if(state.editing){ Object.assign(state.own.find(o=>o.id===state.editing), rec); state.sel="o:"+state.editing; state.editing=null; }
+    else { const id = "o"+Date.now().toString(36)+Math.random().toString(36).slice(2,5); state.own.push(Object.assign({id},rec)); state.sel="o:"+id; Object.assign(draft,{name:"",note:""}); }
+    persist(); renderOwnAll();
+  };
+  const cancel = document.getElementById("fCancel"); if(cancel) cancel.onclick = ()=>{ state.editing=null; renderOwnAll(); };
+  el.querySelectorAll("[data-edit]").forEach(b=> b.onclick = ()=>{ state.editing=b.dataset.edit; state.sel="o:"+b.dataset.edit; renderOwnAll(); document.getElementById("fName").focus(); });
+  el.querySelectorAll("[data-del]").forEach(b=> b.onclick = ()=>{ if(!confirm(t.confirmDel)) return; state.own = state.own.filter(o=>o.id!==b.dataset.del); if(state.sel==="o:"+b.dataset.del) state.sel=null; if(state.editing===b.dataset.del) state.editing=null; persist(); renderOwnAll(); });
+  const seedBtn = document.getElementById("bSeed");
+  if(seedBtn) seedBtn.onclick = ()=>{
+    state.own = VIDENDAG.map(v=>({id:"o"+v.id+Math.random().toString(36).slice(2,6), name:v.name, c:(CATS[v.cat0]?v.cat0:"own"), x:v.x, y:v.y, note:(v.note?v.note+". ":"")+(state.lang==="da"?"Fra Videndag 2026":"From Knowledge Day 2026")}));
+    persist(); renderOwnAll();
+  };
+  document.getElementById("bMail").onclick = sendMail;
+  document.getElementById("bExp").onclick = exportJSON;
+  document.getElementById("bImp").onclick = ()=>document.getElementById("fileImp").click();
+  document.getElementById("fileImp").onchange = importJSON;
+  document.getElementById("bClear").onclick = ()=>{ if(!confirm(t.confirmClear)) return; state.own=[]; state.sel=null; state.editing=null; persist(); renderOwnAll(); };
+}
+const clampN = (v,a,b) => Math.max(a, Math.min(b, Math.round(+v||0)));
+function setDraftPos(x,y){
+  const xi = clampN(x,0,80), yi = clampN(y,0,100);
+  if(state.editing){ const o=state.own.find(o=>o.id===state.editing); o.x=xi; o.y=yi; persist(); renderOwnAll(); }
+  else { draft.x=xi; draft.y=yi; ["fX","fXr"].forEach(id=>{const e=document.getElementById(id); if(e) e.value=xi;}); ["fY","fYr"].forEach(id=>{const e=document.getElementById(id); if(e) e.value=yi;}); const n=document.getElementById("fName"); if(n) n.focus(); renderChartWithGhost(xi,yi); }
+}
+function renderChartWithGhost(x,y){
+  renderChart();
+  const svg = document.querySelector("#chart svg"), dark=isDark();
+  svg.insertAdjacentHTML("beforeend", `<g pointer-events="none"><circle cx="${px(x)}" cy="${py(y)}" r="11" fill="none" stroke="${dark?"#FFF387":"#000000"}" stroke-width="2" stroke-dasharray="3 3"/><line x1="${px(x)-17}" y1="${py(y)}" x2="${px(x)+17}" y2="${py(y)}" stroke="${dark?"#FFF387":"#000000"}"/><line x1="${px(x)}" y1="${py(y)-17}" x2="${px(x)}" y2="${py(y)+17}" stroke="${dark?"#FFF387":"#000000"}"/></g>`);
+}
+function renderOwnAll(){ renderChart(); renderLeft(); renderDetail(); }
+
+function sendMail(){
+  const t=T_();
+  const lines = state.own.map(o=>`- ${o.name} (${catOf(o.c)[state.lang]}): x ${o.x}, y ${o.y}${o.note?". "+o.note:""}`);
+  let body = t.mailIntro + "\n\n";
+  for(const l of lines){ if((body+l).length > 1600){ body += "\n"+t.mailCut; break; } body += l + "\n"; }
+  body += "\n" + (state.lang==="da"?"Kilde: ":"Source: ") + WEF_URL;
+  const a = document.createElement("a");
+  a.href = "mailto:?subject="+encodeURIComponent(t.mailSubject)+"&body="+encodeURIComponent(body);
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function exportJSON(){
+  const payload = {format:"coreskills2030", version:1, base:"WEF Future of Jobs Report 2025, fig. 3.6", exported:new Date().toISOString(),
+    skills: state.own.map(({id,name,c,x,y,note})=>({id,name,category:c,x,y,note}))};
+  const b = new Blob([JSON.stringify(payload,null,2)], {type:"application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "zealand-strategiske-indsatser-2030.json";
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+}
+function importJSON(e){
+  const file = e.target.files[0]; if(!file) return;
+  const r = new FileReader();
+  r.onload = ()=>{
+    try{
+      const data = JSON.parse(r.result); const list = Array.isArray(data) ? data : data.skills;
+      if(!Array.isArray(list)) throw 0;
+      const add = list.map(s=>({id:"o"+Math.random().toString(36).slice(2,9), name:String(s.name||"").slice(0,80), c:(CATS[s.category||s.c]?(s.category||s.c):"own"), x:clampN(s.x,0,80), y:clampN(s.y,0,100), note:String(s.note||"").slice(0,400)})).filter(validOwn);
+      if(!add.length) throw 0;
+      state.own = state.own.concat(add); persist(); renderOwnAll();
+    }catch(_){ alert(T_().importBad); }
+  };
+  r.readAsText(file);
+}
+
+/* ---------- Detaljepanel ---------- */
+function renderDetail(){
+  const el = document.getElementById("detail"), t=T_();
+  if(state.mode==="wef"){ el.hidden=true; return; }
+  el.hidden=false;
+  const sel = state.sel;
+  if(sel && sel.startsWith("d:") && showDkeu()){ el.innerHTML = dkeuDetailHTML(DKEU.find(d=>"d:"+d.id===sel)); return; }
+  if(sel && sel.startsWith("v:") && showVid()){
+    const v = VIDENDAG.find(v=>"v:"+v.id===sel);
+    el.innerHTML = `<h3>${markerSvg("v")}${esc(v.name)} <span class="tag new">${t.tagVid}</span></h3>
+      <p class="note">${t.tt2025} ${v.x} % · ${t.tt2030} ${v.y} % · ${esc(t.q[quad(v)][0])}</p>${v.note?`<p>${esc(v.note)}</p>`:""}<p class="note">${esc(t.vidMethod)}</p>`;
+    return;
+  }
+  if(sel && sel.startsWith("o:") && state.mode==="own"){
+    const o = state.own.find(o=>"o:"+o.id===sel);
+    if(o){ el.innerHTML = `<h3><span class="dot" style="background:${color(o.c,isDark())};border-radius:3px"></span>${esc(o.name)} <span class="tag">${t.tagOwn}</span></h3>
+      <p class="note">${esc(catOf(o.c)[state.lang])} · ${t.tt2025} ${o.x} % · ${t.tt2030} ${o.y} % · ${esc(t.q[quad(o)][0])}</p>${o.note?`<p>${esc(o.note)}</p>`:""}
+      <div class="actions"><button data-edit-d="${o.id}">${t.edit}</button></div>`;
+      el.querySelector("[data-edit-d]").onclick = ()=>{ state.editing=o.id; renderOwnAll(); document.getElementById("fName").focus(); };
+      return; }
+  }
+  el.innerHTML = t.detailDefault[state.mode];
+}
+
+/* ---------- Kildepanel ---------- */
+function renderSource(){
+  const t = T_(), el = document.getElementById("source");
+  const wefBlock = `${t.srcBody}<div class="cite" id="apa">${esc(t.apa)}</div>
+    <div class="actions"><button id="btnCopy">${t.copy}</button><a class="btn" href="${WEF_URL}" target="_blank" rel="noopener">weforum.org ↗</a></div>`;
+  if(state.mode==="wef"){
+    el.innerHTML = `<h2>${t.srcTitle}</h2>${wefBlock}<small style="margin-top:14px">${t.note}</small>`;
+  } else if(state.mode==="dkeu"){
+    let h = `<h2>${t.dkeuSrcTitle}</h2><p class="note">${esc(t.dkeuSrcIntro)}</p>`;
+    ["dk","nord","eu"].forEach(g=>{
+      h += `<h3>${t.groups[g]}</h3><ul>` + Object.values(SRC).filter(s=>s.g===g).map(s=>`<li><a href="${s.u}" target="_blank" rel="noopener">${esc(s.t)}</a></li>`).join("") + `</ul>`;
+    });
+    h += `<h3>${t.groups.glob}</h3>${wefBlock}`;
+    el.innerHTML = h;
+  } else if(state.mode==="vid"){
+    el.innerHTML = `<h2>${t.vidSrcTitle}</h2>${t.vidSrcBody}<h3>${t.dkeuSrcTitle}</h3><p class="note">${state.lang==="da"?"Se trin 2 for de danske, nordiske og europæiske kilder.":"See step 2 for the Danish, Nordic and European sources."}</p><h3>${t.srcTitle}</h3>${wefBlock}`;
+  } else {
+    el.innerHTML = `<h2>${t.ownSrcTitle}</h2>${t.ownSrcBody}<h3>${t.vidSrcTitle}</h3>${t.vidSrcBody}<h3>${t.srcTitle}</h3>${wefBlock}`;
+  }
+  const bc = document.getElementById("btnCopy");
+  if(bc) bc.onclick = async e=>{
+    try{ await navigator.clipboard.writeText(t.apa); }
+    catch(_){ const r=document.createRange(); r.selectNodeContents(document.getElementById("apa")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand("copy"); s.removeAllRanges(); }
+    e.target.textContent = t.copied; setTimeout(()=>e.target.textContent=t.copy, 1600);
+  };
+}
+
+function renderText(){
+  const t = T_();
+  root.lang = state.lang;
+  document.getElementById("eyebrow").textContent = t.eyebrow;
+  document.getElementById("title").innerHTML = t.title;
+  document.getElementById("lead").textContent = t.intro;
+  document.getElementById("modeLead").textContent = t.lead[state.mode];
+  document.getElementById("hint").textContent = t.hint[state.mode];
+  document.getElementById("btnLabels").textContent = t.labels;
+  [["btnBgWef","bgWef"],["btnBgDk","bgDk"],["btnBgVid","bgVid"]].forEach(([id,k])=>{ const b=document.getElementById(id); b.textContent=t[k]; b.hidden = k==="bgVid" ? state.mode!=="own" : !layered(); b.setAttribute("aria-pressed", state[k]); });
+  document.getElementById("btnLabels").hidden = state.mode==="dkeu";
+  document.getElementById("btnReset").textContent = t.reset;
+  document.getElementById("btnPng").textContent = t.png;
+  const order = ["wef","dkeu","vid","own"];
+  document.querySelectorAll("[data-mode]").forEach(b=>{ const [tt,ss]=t.steps[b.dataset.mode]; b.innerHTML=`<span class="n">${order.indexOf(b.dataset.mode)+1}</span><span class="t">${esc(tt)}</span><span class="s">${esc(ss)}</span>`; b.setAttribute("aria-pressed", b.dataset.mode===state.mode); });
+  document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===state.lang));
+}
+function renderAll(){ renderText(); renderLegend(); renderChart(); renderLeft(); renderDetail(); renderSource(); }
+
+/* ---------- Tooltip ---------- */
+const tip = document.getElementById("tip");
+function findByKey(k){
+  const [type,id] = k.split(":");
+  if(type==="w") return {type, d:DATA.find(x=>x.id===id)};
+  if(type==="d") return {type, d:DKEU.find(x=>x.id===id)};
+  if(type==="v") return {type, d:VIDENDAG.find(x=>x.id===id)};
+  return {type, d:state.own.find(x=>x.id===id)};
+}
+function showTip(k){
+  const {type,d} = findByKey(k); if(!d) return;
+  const t = T_(), dark = isDark(), chart = document.getElementById("chart");
+  let head = esc(nameOf(d,state.lang)), extra = "";
+  if(type==="d") extra = `<div class="q">${d.kind==="new"?t.tagNew:t.tagMove} (DK/EU) · ${t.est}</div>`;
+  if(type==="o" && d.note) extra = `<div class="q">${esc(d.note)}</div>`;
+  if(type==="w") extra = `<div class="q">${esc(t.q[quad(d)][0])}</div>`;
+  if(type==="v" && d.note) extra = `<div class="q">${esc(d.note)}</div>`;
+  const catLine = type==="v" ? `<div class="cat">${markerSvg("v")}${esc(t.tagVid)}</div>` : `<div class="cat"><span class="dot" style="background:${color(d.c,dark)}"></span>${esc(catOf(d.c)[state.lang])}</div>`;
+  tip.innerHTML = `<b>${head}</b>
+    ${catLine}
+    <div class="row"><span>${t.tt2025}</span><span>${d.x} %</span></div>
+    <div class="row"><span>${t.tt2030}</span><span>${d.y} %</span></div>${extra}`;
+  const cr = chart.getBoundingClientRect();
+  const mk = chart.querySelector(`[data-k="${k}"] .mk`); if(!mk) return;
+  const r = mk.getBoundingClientRect();
+  let left = r.right - cr.left + chart.scrollLeft + 10, top = r.top - cr.top - 10;
+  tip.classList.add("show");
+  const tw = tip.offsetWidth, thh = tip.offsetHeight;
+  if(left + tw > chart.scrollLeft + cr.width - 8) left = r.left - cr.left + chart.scrollLeft - tw - 10;
+  if(top + thh > cr.height - 8) top = cr.height - thh - 8;
+  tip.style.left = Math.max(8,left)+"px"; tip.style.top = Math.max(8,top)+"px";
+}
+function hideTip(){ if(!state.pinned) tip.classList.remove("show"); }
+
+/* ---------- Hændelser i figuren ---------- */
+const chartEl = document.getElementById("chart");
+let drag = null, suppressClick = false;
+function svgPoint(evt){ const svg = chartEl.querySelector("svg"); const p = svg.createSVGPoint(); p.x=evt.clientX; p.y=evt.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+
+chartEl.addEventListener("mouseover", e=>{ if(drag) return; const g=e.target.closest(".pt"); if(g && !state.pinned) showTip(g.dataset.k); });
+chartEl.addEventListener("mouseout", e=>{ const g=e.target.closest(".pt"); if(g && !g.contains(e.relatedTarget)) hideTip(); });
+
+chartEl.addEventListener("pointerdown", e=>{
+  const g = e.target.closest(".own"); if(!g || state.mode!=="own") return;
+  const o = state.own.find(x=>"o:"+x.id===g.dataset.k); if(!o) return;
+  const p = svgPoint(e);
+  drag = {g, o, sx:p.x, sy:p.y, moved:false, id:e.pointerId};
+  g.setPointerCapture(e.pointerId); g.classList.add("drag"); tip.classList.remove("show");
+  e.preventDefault();
+});
+chartEl.addEventListener("pointermove", e=>{
+  if(!drag) return;
+  const p = svgPoint(e), dx = p.x-drag.sx, dy = p.y-drag.sy;
+  if(Math.hypot(dx,dy) > 3) drag.moved = true;
+  const nx = Math.max(X0, Math.min(X1, px(drag.o.x)+dx)) - px(drag.o.x);
+  const ny = Math.max(Y0, Math.min(Y1, py(drag.o.y)+dy)) - py(drag.o.y);
+  drag.g.setAttribute("transform", `translate(${nx} ${ny})`);
+  drag.nx = drag.o.x + nx*XMAX/(X1-X0); drag.ny = drag.o.y - ny*YMAX/(Y1-Y0);
+});
+chartEl.addEventListener("pointerup", e=>{
+  if(!drag) return;
+  const d = drag; drag = null;
+  if(d.moved){ d.o.x = clampN(d.nx,0,80); d.o.y = clampN(d.ny,0,100); state.sel = "o:"+d.o.id; persist(); suppressClick = true; renderOwnAll(); setTimeout(()=>suppressClick=false, 0); }
+});
+
+chartEl.addEventListener("click", e=>{
+  if(suppressClick) return;
+  const g = e.target.closest(".pt");
+  if(g){
+    const k = g.dataset.k, type = k[0];
+    if(type==="d" || type==="o" || type==="v"){ state.sel = state.sel===k ? null : k; state.pinned=null; tip.classList.remove("show"); renderChart(); renderDetail(); if((state.mode==="dkeu" && type==="d") || (state.mode==="vid" && type==="v")) { renderLeft(); scrollToItem(k.slice(2)); } return; }
+    state.pinned = state.pinned===k ? null : k; renderChart(); if(state.pinned) showTip(k); else tip.classList.remove("show"); return;
+  }
+  if(state.pinned){ state.pinned=null; tip.classList.remove("show"); renderChart(); return; }
+  if(state.mode==="own"){
+    const svg = chartEl.querySelector("svg"); if(!svg.contains(e.target)) return;
+    const p = svgPoint(e);
+    if(p.x>=X0 && p.x<=X1 && p.y>=Y0 && p.y<=Y1){ setDraftPos(ux(p.x), uy(p.y)); }
+    return;
+  }
+  const q = e.target.closest("[data-q]");
+  if(q){ const v=q.dataset.q; state.focus = (state.focus && state.focus.t==="q" && state.focus.v===v) ? null : {t:"q",v}; renderLegend(); renderChart(); if(state.mode==="wef") renderLeft(); }
+});
+function scrollToItem(id){ const it = document.querySelector(`[data-item="${id}"]`); if(it) it.scrollIntoView({block:"nearest", behavior:"smooth"}); }
+
+document.getElementById("left").addEventListener("click", e=>{
+  const th = e.target.closest("th");
+  if(th && state.mode==="wef"){ const k = th.dataset.k; state.sort = state.sort.k===k ? {k,dir:-state.sort.dir} : {k,dir:(k==="n"||k==="q")?1:-1}; renderLeft(); return; }
+  const pick = e.target.closest("[data-pick]");
+  const pickv = e.target.closest("[data-pickv]");
+  if(pickv){ state.sel = "v:"+pickv.dataset.pickv; renderChart(); renderDetail(); renderLeft(); document.getElementById("detail").scrollIntoView({block:"nearest", behavior:"smooth"}); return; }
+  if(pick){ state.sel = "d:"+pick.dataset.pick; renderChart(); renderDetail(); renderLeft(); document.getElementById("detail").scrollIntoView({block:"nearest", behavior:"smooth"}); }
+});
+document.getElementById("legend").addEventListener("click", e=>{
+  const b = e.target.closest("[data-cat]"); if(!b) return;
+  const v = b.dataset.cat;
+  state.focus = (state.focus && state.focus.t==="cat" && state.focus.v===v) ? null : {t:"cat",v};
+  renderLegend(); renderChart(); if(state.mode==="wef") renderLeft();
+});
+document.querySelectorAll("[data-mode]").forEach(b=> b.onclick = ()=>{
+  state.mode = b.dataset.mode; state.pinned=null; state.sel=null; state.editing=null; tip.classList.remove("show"); persist(); renderAll();
+});
+document.getElementById("btnLabels").onclick = e=>{ state.labels=!state.labels; e.target.setAttribute("aria-pressed",state.labels); renderChart(); };
+[["btnBgWef","bgWef"],["btnBgDk","bgDk"],["btnBgVid","bgVid"]].forEach(([id,k])=>{ document.getElementById(id).onclick = e=>{ state[k]=!state[k]; e.target.setAttribute("aria-pressed",state[k]); renderLegend(); renderChart(); }; });
+document.getElementById("btnReset").onclick = ()=>{ state.focus=null; state.pinned=null; state.sel=null; tip.classList.remove("show"); renderLegend(); renderChart(); renderLeft(); renderDetail(); };
+document.querySelectorAll("[data-lang]").forEach(b=> b.onclick = ()=>{ state.lang=b.dataset.lang; tip.classList.remove("show"); state.pinned=null; persist(); renderAll(); });
+document.getElementById("btnTheme").onclick = ()=>{ root.dataset.theme = isDark() ? "light" : "dark"; renderAll(); };
+mq.addEventListener("change", ()=>{ if(!root.dataset.theme) renderAll(); });
+
+/* ---------- PNG-eksport: lyst tema, aktuelt lag, kilde indlejret ---------- */
+document.getElementById("btnPng").onclick = ()=>{
+  const th = THEMES.light, t = T_(), W = 1000, font = "Inter, 'Helvetica Neue', Arial, sans-serif";
+  const sub = state.mode==="wef" ? "" : t.expSub[state.mode];
+  const top = sub ? 118 : 96, chartEnd = top + 715;
+  let y = chartEnd + 22, leg = "";
+  Object.entries(CATS).forEach(([k,c],i)=>{
+    const col = i%4, row = Math.floor(i/4), x = 90 + col*220, yy = y + row*26;
+    leg += `<circle cx="${x+6}" cy="${yy-4}" r="6.5" fill="${c.l}"/><text x="${x+20}" y="${yy}" font-size="13" fill="${th.ink}">${esc(c[state.lang])}</text>`;
+  });
+  y += 52;
+  if(state.mode!=="wef"){
+    const items = [["wd",t.mk.wefDim]];
+    if(showDkeu()) items.push(["n",t.mk.nw],["m",t.mk.mv]);
+    if(showVid()) items.push(["v",t.mk.vid]);
+    if(state.mode==="own") items.push(["o",t.mk.own]);
+    items.forEach(([k,lab],i)=>{
+      const x = 90 + (i%4)*220 + 0, ink=th.muted; if(i===4){ y += 26; } 
+      const m = k==="wd" ? `<circle cx="${x+6}" cy="${y-4}" r="4.5" fill="${ink}" opacity=".4"/>` :
+                k==="n" ? `<path d="${diamond(x+6,y-4,7)}" fill="${ink}"/>` :
+                k==="m" ? `<circle cx="${x+6}" cy="${y-4}" r="5.5" fill="#fff" stroke="${ink}" stroke-width="2.5"/>` :
+                k==="v" ? `<path d="${hexagon(x+6,y-4,7.5)}" fill="#FFF387" stroke="#000" stroke-width="1.4"/>` :
+                `<rect x="${x}" y="${y-10}" width="12" height="12" rx="3" fill="${ink}"/>`;
+      leg += m + `<text x="${x+20}" y="${y}" font-size="13" fill="${th.ink}">${esc(lab)}</text>`;
+    });
+    y += 28;
+  }
+  y += 8;
+  let foot = `<line x1="90" y1="${y}" x2="960" y2="${y}" stroke="${th.grid}"/>`;
+  y += 26; foot += `<text x="90" y="${y}" font-size="12.5" fill="${th.ink}">${esc(t.exp1)}</text>`;
+  y += 20; foot += `<text x="90" y="${y}" font-size="12.5" fill="${th.muted}">${esc(t.exp2)}</text>`;
+  if(showDkeu()){ y += 20; foot += `<text x="90" y="${y}" font-size="12.5" fill="${th.muted}">${esc(t.exp3)}</text>`; }
+  if(showVid()){ y += 20; foot += `<text x="90" y="${y}" font-size="12.5" fill="${th.muted}">${esc(t.exp4)}</text>`; }
+  const H = y + 34;
+  const pinnedBackup = state.pinned; state.pinned = null;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="${font}">
+    <rect width="${W}" height="${H}" fill="#FFFFFF"/>
+    <rect x="90" y="24" width="10" height="10" fill="${th.hl}" stroke="#000" stroke-width="1"/><text x="108" y="34" font-size="12" font-weight="600" fill="${th.ink}" letter-spacing="1">${esc(t.eyebrow.toUpperCase())}</text>
+    <rect x="84" y="50" width="${Math.min(890, 19.8*(t.titlePlain+t.titleSuffix[state.mode]).length+8)}" height="42" fill="${th.hl}"/><text x="90" y="82" font-size="34" font-weight="800" fill="${th.ink}">${esc(t.titlePlain+t.titleSuffix[state.mode])}</text>
+    ${sub?`<text x="90" y="106" font-size="13.5" fill="${th.muted}">${esc(sub)}</text>`:""}
+    <g transform="translate(0,${top})">${chartMarkup(th,false,state.lang)}</g>
+    ${leg}${foot}
+  </svg>`;
+  state.pinned = pinnedBackup;
+  const img = new Image();
+  img.onload = ()=>{
+    const scale = 2, cv = document.createElement("canvas");
+    cv.width = W*scale; cv.height = H*scale;
+    const ctx = cv.getContext("2d"); ctx.scale(scale,scale); ctx.drawImage(img,0,0);
+    cv.toBlob(b=>{
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(b);
+      const base = state.lang==="da" ? "kernekompetencer-2030" : "core-skills-2030";
+      a.download = `${base}-${state.mode}.png`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+    }, "image/png");
+  };
+  img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+};
+
+renderAll();
+</script>
+</body>
+</html>
