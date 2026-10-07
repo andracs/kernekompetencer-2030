@@ -368,7 +368,7 @@ const T = {
     hint:{wef:"Klik på en kategori eller et kvadrant for at fremhæve. Hold over eller tryk på et punkt for detaljer.",
           dkeu:"Klik på et punkt for begrundelse og kilder. WEF-punkterne er nedtonet; hold over dem for at se værdierne.",
           vid:"Klik på et punkt for detaljer. Hold over de nedtonede punkter, eller brug Fremhæv WEF og Fremhæv DK/EU.",
-          own:"Klik et tomt sted i figuren for at sætte placering i formularen. Træk i jeres punkter for at flytte dem. Hold over eller klik på de nedtonede punkter, eller brug knapperne til at fremhæve et lag."},
+          own:"Klik et tomt sted i figuren for at vælge placering. Træk i jeres punkter for at flytte dem. Hold over eller klik på de nedtonede punkter, eller brug knapperne til at fremhæve et lag."},
     mk:{wef:"WEF-placering", wefDim:"WEF (nedtonet)", nw:"Tilføjet (DK/EU)", mv:"Flyttet (DK/EU)", own:"Strategisk indsats", vid:"Videndag 2026"},
     tt2025:"Kerne i 2025", tt2030:"Forventer stigning", est:"vurderet",
     tagNew:"Tilføjet", tagMove:"Flyttet", tagOwn:"Indsats", tagVid:"Videndag 2026", from:"fra", to:"til",
@@ -391,7 +391,7 @@ const T = {
     dkeuSrcTitle:"Kilder til DK/EU-laget",
     dkeuSrcIntro:"De tilføjede og flyttede punkter er kvalitative vurderinger baseret på kilderne herunder. Akserne er stadig WEF's, så placeringerne viser retning og relativ vægt, ikke målte andele.",
     groups:{dk:"Danmark", nord:"Norden", eu:"EU", glob:"Globalt"},
-    ownTitle:"Officielle strategiske indsatser på Zealand (under udvikling)", fName:"Indsats", fCat:"Kategori", fX:"Kerne i dag (%)", fY:"Forventet stigning (%)", fNote:"Note (valgfri)",
+    ownTitle:"Officielle strategiske indsatser på Zealand (under udvikling)", fName:"Indsats", fCat:"Kategori", fPos:"Placering: klik i figuren for at vælge, eller træk punktet bagefter.", fNote:"Note (valgfri)",
     add:"Tilføj", save:"Gem ændringer", cancel:"Annullér", edit:"Redigér", del:"Slet",
     mail:"Send som mail", exp:"Eksportér JSON", imp:"Importér JSON", clear:"Ryd alle",
     confirmClear:"Slet alle indsatser i denne browser?", confirmDel:"Slet denne indsats?",
@@ -436,7 +436,7 @@ const T = {
     hint:{wef:"Click a category or a quadrant to highlight it. Hover or tap a point for details.",
           dkeu:"Click a point for rationale and sources. WEF points are dimmed; hover them to see values.",
           vid:"Click a point for details. Hover the dimmed points, or use Highlight WEF and Highlight DK/EU.",
-          own:"Click an empty spot in the chart to set the position in the form. Drag your points to move them. Hover or click the dimmed points, or use the buttons to highlight a layer."},
+          own:"Click an empty spot in the chart to choose the position. Drag your points to move them. Hover or click the dimmed points, or use the buttons to highlight a layer."},
     mk:{wef:"WEF position", wefDim:"WEF (dimmed)", nw:"Added (DK/EU)", mv:"Moved (DK/EU)", own:"Strategic priority", vid:"Knowledge Day 2026"},
     tt2025:"Core in 2025", tt2030:"Expect increase", est:"assessed",
     tagNew:"Added", tagMove:"Moved", tagOwn:"Priority", tagVid:"Knowledge Day 2026", from:"from", to:"to",
@@ -459,7 +459,7 @@ const T = {
     dkeuSrcTitle:"Sources for the DK/EU layer",
     dkeuSrcIntro:"Added and moved points are qualitative assessments based on the sources below. The axes remain WEF's, so positions show direction and relative weight, not measured shares.",
     groups:{dk:"Denmark", nord:"Nordics", eu:"EU", glob:"Global"},
-    ownTitle:"Official strategic priorities at Zealand (in development)", fName:"Priority", fCat:"Category", fX:"Core today (%)", fY:"Expected increase (%)", fNote:"Note (optional)",
+    ownTitle:"Official strategic priorities at Zealand (in development)", fName:"Priority", fCat:"Category", fPos:"Position: click in the chart to choose, or drag the point afterwards.", fNote:"Note (optional)",
     add:"Add", save:"Save changes", cancel:"Cancel", edit:"Edit", del:"Delete",
     mail:"Send by email", exp:"Export JSON", imp:"Import JSON", clear:"Clear all",
     confirmClear:"Delete all priorities in this browser?", confirmDel:"Delete this priority?",
@@ -495,7 +495,7 @@ function load(){ try{ const raw = localStorage.getItem(LS); return raw ? JSON.pa
 function persist(){ try{ localStorage.setItem(LS, JSON.stringify({mode:state.mode, lang:state.lang, own:state.own})); storageOK=true; }catch(_){ storageOK=false; } }
 const saved = load();
 const state = {
-  mode: ["wef","dkeu","vid","own"].includes(saved.mode) ? saved.mode : "wef",
+  mode: "vid",
   lang: saved.lang==="en" ? "en" : "da",
   own: Array.isArray(saved.own) ? saved.own.filter(validOwn) : [],
   labels:true, bgWef:false, bgDk:false, bgVid:false, focus:null, sort:{k:"y",dir:-1}, pinned:null, sel:null, editing:null
@@ -747,15 +747,14 @@ function renderOwnEditor(el){
   h += `<form id="ownForm" autocomplete="off">
     <label class="full">${t.fName}<input id="fName" maxlength="80" required value="${esc(f.name)}"></label>
     <label class="full">${t.fCat}<select id="fCat">${opts}</select></label>
-    <label>${t.fX}<span class="rangeRow"><input type="range" id="fXr" min="0" max="80" step="1" value="${f.x}"><input type="number" id="fX" min="0" max="80" step="1" value="${f.x}"></span></label>
-    <label>${t.fY}<span class="rangeRow"><input type="range" id="fYr" min="0" max="100" step="1" value="${f.y}"><input type="number" id="fY" min="0" max="100" step="1" value="${f.y}"></span></label>
+    <p class="note full" style="margin:0">${esc(t.fPos)}</p>
     <label class="full">${t.fNote}<textarea id="fNote" maxlength="400">${esc(f.note||"")}</textarea></label>
     <div class="actions full"><button type="submit" class="primary">${editing?t.save:t.add}</button>${editing?`<button type="button" id="fCancel">${t.cancel}</button>`:""}</div>
   </form><div class="scroll" style="max-height:320px">`;
   if(!state.own.length) h += `<p class="empty">${esc(t.none)}</p><div class="actions" style="margin-bottom:8px"><button id="bSeed">${markerSvg("v")} ${esc(t.seed)}</button></div>`;
   state.own.forEach(o=>{
     h += `<div class="ownrow"><span class="dot" style="background:${color(o.c,dark)};border-radius:3px;margin-top:5px"></span>
-      <div class="meta"><b>${esc(o.name)}</b><span>${esc(catOf(o.c)[state.lang])} · ${o.x} / ${o.y}${o.note?" · "+esc(o.note):""}</span></div>
+      <div class="meta"><b>${esc(o.name)}</b><span>${esc(catOf(o.c)[state.lang])} · ${esc(t.q[quad(o)][0])}${o.note?" · "+esc(o.note):""}</span></div>
       <div class="btns"><button data-edit="${o.id}">${t.edit}</button><button data-del="${o.id}">${t.del}</button></div></div>`;
   });
   h += `</div><div class="actions" style="margin-top:14px">
@@ -767,14 +766,12 @@ function renderOwnEditor(el){
   </div>`;
   el.innerHTML = h;
 
-  const sync = (a,b)=>{ const A=document.getElementById(a), B=document.getElementById(b); A.oninput=()=>{B.value=A.value; mirror();}; B.oninput=()=>{A.value=B.value; mirror();}; };
-  const mirror = ()=>{ if(!state.editing){ draft.name=fName.value; draft.c=fCat.value; draft.x=+fX.value; draft.y=+fY.value; draft.note=fNote.value; } };
-  sync("fXr","fX"); sync("fYr","fY");
-  const fName=document.getElementById("fName"), fCat=document.getElementById("fCat"), fX=document.getElementById("fX"), fY=document.getElementById("fY"), fNote=document.getElementById("fNote");
+  const mirror = ()=>{ if(!state.editing){ draft.name=fName.value; draft.c=fCat.value; draft.note=fNote.value; } };
+  const fName=document.getElementById("fName"), fCat=document.getElementById("fCat"), fNote=document.getElementById("fNote");
   [fName,fCat,fNote].forEach(i=>i.addEventListener("input",mirror));
   document.getElementById("ownForm").onsubmit = e=>{
     e.preventDefault();
-    const rec = {name:fName.value.trim(), c:fCat.value, x:clampN(fX.value,0,80), y:clampN(fY.value,0,100), note:fNote.value.trim()};
+    const rec = {name:fName.value.trim(), c:fCat.value, x:clampN(f.x,0,80), y:clampN(f.y,0,100), note:fNote.value.trim()};
     if(!rec.name) return fName.focus();
     if(state.editing){ Object.assign(state.own.find(o=>o.id===state.editing), rec); state.sel="o:"+state.editing; state.editing=null; }
     else { const id = "o"+Date.now().toString(36)+Math.random().toString(36).slice(2,5); state.own.push(Object.assign({id},rec)); state.sel="o:"+id; Object.assign(draft,{name:"",note:""}); }
