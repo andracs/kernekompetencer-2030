@@ -99,6 +99,22 @@
       "x": 29,
       "y": 83,
       "note": ""
+    },
+    {
+      "id": "v13",
+      "name": "Selvbestemmelse",
+      "category": "sef",
+      "x": 42,
+      "y": 67,
+      "note": ""
+    },
+    {
+      "id": "v14",
+      "name": "Research skills",
+      "category": "cog",
+      "x": 18,
+      "y": 66,
+      "note": ""
     }
   ],
   "source": "Zealand Videndag 2026, workshop om kernekompetencer i 2030"
