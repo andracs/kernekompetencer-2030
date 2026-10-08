@@ -504,7 +504,7 @@ const THEMES = {
 const LS = "coreskills2030:v1";
 let storageOK = true;
 function load(){ try{ const raw = localStorage.getItem(LS); return raw ? JSON.parse(raw) : {}; }catch(_){ storageOK=false; return {}; } }
-function persist(){ try{ localStorage.setItem(LS, JSON.stringify({mode:state.mode, lang:state.lang, own:state.own})); storageOK=true; }catch(_){ storageOK=false; } }
+function persist(){ try{ localStorage.setItem(LS, JSON.stringify({v:2, example:true, mode:state.mode, lang:state.lang, own:state.own})); storageOK=true; }catch(_){ storageOK=false; } }
 const saved = load();
 const state = {
   mode: "vid",
@@ -513,6 +513,18 @@ const state = {
   labels:true, bgWef:false, bgDk:false, bgVid:false, focus:null, sort:{k:"y",dir:-1}, pinned:null, sel:null, editing:null
 };
 function validOwn(o){ return o && typeof o.name==="string" && o.name.trim() && isFinite(o.x) && isFinite(o.y); }
+/* Engangsoprydning (v2): fjern testpunkter, og tilføj udfyld-eksemplet én gang */
+const EXAMPLE = {id:"oexample", name:"Dette her kan man udfylde, hvis man ønsker at konkludere noget på Zealand", c:"own", x:60, y:75, note:"Eksempel. Klik Redigér og skriv jeres indsats, eller slet punktet."};
+(function migrate(){
+  let changed = false;
+  if((saved.v||1) < 2){
+    const before = state.own.length;
+    state.own = state.own.filter(o=>!/^(zd|test)$/i.test(o.name.trim()));
+    changed = changed || state.own.length !== before;
+  }
+  if(!saved.example){ state.own.unshift(Object.assign({}, EXAMPLE)); changed = true; }
+  if(changed || (saved.v||1) < 2) try{ localStorage.setItem(LS, JSON.stringify({v:2, example:true, mode:state.mode, lang:state.lang, own:state.own})); }catch(_){ storageOK=false; }
+})();
 
 const root = document.documentElement;
 const mq = matchMedia("(prefers-color-scheme: dark)");
@@ -555,7 +567,8 @@ function wrapName(name){
   const words = String(name).split(/\s+/); const lines=[]; let cur="";
   words.forEach(w=>{ if((cur+" "+w).trim().length>20 && cur){ lines.push(cur); cur=w; } else cur=(cur+" "+w).trim(); });
   if(cur) lines.push(cur);
-  return lines.slice(0,3);
+  if(lines.length>4){ const k=lines.slice(0,4); k[3]=k[3].replace(/\s*\S*$/,"")+" …"; return k; }
+  return lines;
 }
 
 /* ---------- Figur ---------- */
@@ -769,7 +782,8 @@ function renderOwnEditor(el){
     <label class="full">${t.fNote}<textarea id="fNote" maxlength="400">${esc(f.note||"")}</textarea></label>
     <div class="actions full"><button type="submit" class="primary">${editing?t.save:t.add}</button>${editing?`<button type="button" id="fCancel">${t.cancel}</button>`:""}</div>
   </form><div class="scroll" style="max-height:320px">`;
-  if(!state.own.length) h += `<p class="empty">${esc(t.none)}</p><div class="actions" style="margin-bottom:8px"><button id="bSeed">${markerSvg("v")} ${esc(t.seed)}</button></div>`;
+  if(!state.own.length) h += `<p class="empty">${esc(t.none)}</p>`;
+  if(!VIDENDAG.every(v=>state.own.some(o=>o.name===v.name))) h += `<div class="actions" style="margin-bottom:8px"><button id="bSeed">${markerSvg("v")} ${esc(t.seed)}</button></div>`;
   state.own.forEach(o=>{
     h += `<div class="ownrow"><span class="dot" style="background:${color(o.c,dark)};border-radius:3px;margin-top:5px"></span>
       <div class="meta"><b>${esc(o.name)}</b><span>${esc(catOf(o.c)[state.lang])} · ${esc(t.q[quad(o)][0])}${o.note?" · "+esc(o.note):""}</span></div>
@@ -800,7 +814,7 @@ function renderOwnEditor(el){
   el.querySelectorAll("[data-del]").forEach(b=> b.onclick = ()=>{ if(!confirm(t.confirmDel)) return; state.own = state.own.filter(o=>o.id!==b.dataset.del); if(state.sel==="o:"+b.dataset.del) state.sel=null; if(state.editing===b.dataset.del) state.editing=null; persist(); renderOwnAll(); });
   const seedBtn = document.getElementById("bSeed");
   if(seedBtn) seedBtn.onclick = ()=>{
-    state.own = VIDENDAG.map(v=>({id:"o"+v.id+Math.random().toString(36).slice(2,6), name:v.name, c:(CATS[v.cat0]?v.cat0:"own"), x:v.x, y:v.y, note:(v.note?v.note+". ":"")+(state.lang==="da"?"Fra Videndag 2026":"From Knowledge Day 2026")}));
+    state.own = state.own.concat(VIDENDAG.filter(v=>!state.own.some(o=>o.name===v.name)).map(v=>({id:"o"+v.id+Math.random().toString(36).slice(2,6), name:v.name, c:(CATS[v.cat0]?v.cat0:"own"), x:v.x, y:v.y, note:(v.note?v.note+". ":"")+(state.lang==="da"?"Fra Videndag 2026":"From Knowledge Day 2026")})));
     persist(); renderOwnAll();
   };
   document.getElementById("bMail").onclick = sendMail;
