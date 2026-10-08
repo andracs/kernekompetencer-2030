@@ -68,7 +68,7 @@ button.ghost{background:transparent}
 .markers svg{flex:none}
 .hint{font-size:12.5px;color:var(--muted);padding:4px 16px 0;margin:0}
 .chart{position:relative;overflow-x:auto;padding:4px 8px 8px;-webkit-overflow-scrolling:touch}
-.chart svg{display:block;width:100%;min-width:720px;height:auto;touch-action:manipulation}
+.chart > svg{display:block;width:100%;min-width:720px;height:auto;touch-action:manipulation}
 .chart .pt{cursor:pointer}
 .chart .pt .mk{transition:stroke-width .12s}
 .chart .pt:hover .mk,.chart .pt.on .mk{stroke-width:4}
@@ -341,7 +341,9 @@ const VIDENDAG = [
   {id:"v11", name:"Nøjsom / sparsom", cat0:"tec", x:26, y:60, note:""},
   {id:"v12", name:"Humanisme", cat0:"tec", x:29, y:83, note:""},
   {id:"v13", name:"Selvbestemmelse", cat0:"sef", x:42, y:67, note:""},
-  {id:"v14", name:"Research skills", cat0:"cog", x:18, y:66, note:""}
+  {id:"v14", name:"Research skills", cat0:"cog", x:18, y:66, note:""},
+  {id:"v15", name:"Digital suverænitet", cat0:"eth", x:54, y:86, note:""},
+  {id:"v16", name:"Resiliens", cat0:"sef", x:63, y:77, note:""}
 ].map(v=>Object.assign({c:"vid"}, v));
 const MOVED = new Set(DKEU.filter(d=>d.kind==="move").map(d=>d.ref));
 
@@ -358,7 +360,7 @@ const T = {
     lead:{
       wef:"Hvilke kompetencer er kerne i dag, og hvilke forventer arbejdsgiverne vil vokse frem mod 2030? Figuren bygger på svar fra over 1.000 arbejdsgivere i 55 økonomier.",
       dkeu:"Samme figur set gennem danske, nordiske og europæiske kilder. Syv kompetencer, som WEF ikke har med, er tilføjet, og fire er flyttet. De nye placeringer er kvalitative vurderinger, ikke surveydata.",
-      vid:"De kompetencer, deltagerne diskuterede og placerede på workshoppen på Zealand Videndag 2026. WEF og DK/EU ligger nedtonet i baggrunden og kan hentes frem. Placeringerne er workshoppens egne vurderinger, ikke surveydata.",
+      vid:"De kompetencer, deltagerne diskuterede og placerede på workshoppen på Zealand Videndag 2026. WEF og DK/EU ligger nedtonet i baggrunden og kan hentes frem. Placeringerne er omtrentlige: de blev sat hurtigt på workshoppen og er lidt tilfældige. Først i trin 4 placeres indsatserne præcist i kvadranten.",
       own:"Her formuleres Zealands officielle strategiske indsatser, mens de er under udvikling. Placér dem i forhold til WEF, DK/EU og Videndagens kompetencer, som ligger nedtonet i baggrunden. Klik i figuren for at vælge en placering, træk i punkterne for at flytte dem. Alt gemmes kun i denne browser."},
     x:"Andel arbejdsgivere, der betragter kompetencen som kerne i 2025 (%)",
     y:"Andel, der forventer stigende brug frem mod 2030 (%)",
@@ -379,7 +381,11 @@ const T = {
     blind:["<b>Normativt, ikke målt.</b> DigComp, GreenComp og Union of Skills beskriver, hvad borgere bør kunne. WEF måler, hvad arbejdsgivere siger, de efterspørger.",
            "<b>Politisk bevægeligt.</b> Blødgørelsen af AI Act art. 4 i Digital Omnibus viser, at regulatoriske krav kan ændre sig hurtigt.",
            "<b>Relationelle kompetencer underbelyses.</b> EU-rammeværkerne siger mindre om ledelse, empati og samarbejde, som både WEF og OECD fremhæver."],
-    vidTitle:"Diskuterede kompetencer, Zealand Videndag 2026", vidMethod:"Kompetencerne og deres placering er formuleret af deltagerne på workshoppen og importeret fra workshoppens eksport. Akserne er WEF's, så placeringerne viser workshoppens vurdering af, hvor central kompetencen er i dag, og hvor meget den vil vokse.",
+    vidTitle:"Diskuterede kompetencer, Zealand Videndag 2026", vidMethod:"Kompetencerne og deres placering er formuleret af deltagerne på workshoppen og importeret fra workshoppens eksport. Akserne er WEF's, men placeringerne er omtrentlige og viser kun groft, hvilken kvadrant workshoppen så kompetencen i.",
+    vidObsTitle:"Bemærkninger",
+    vidObs:["<b>Placeringen er omtrentlig.</b> Punkterne blev sat hurtigt på workshoppen og er lidt tilfældige. Læs dem som kvadrant, ikke som præcise procenter. Først i trin 4 placeres indsatserne præcist.",
+            "<b>Stabile-kvadranten er tom.</b> Ingen af kompetencerne blev vurderet som kerne i dag uden at vokse. Det er spøjst. Måske fordi en workshop om fremtiden naturligt kigger efter vækst, eller fordi det, vi tager for givet, sjældent bliver nævnt. Værd at drøfte: hvad er Zealands stabile fundament?"],
+    vidApprox:"Omtrentlig placering", vidEmpty:"Tom på Videndagen",
     vidSrcTitle:"Om Videndag-laget", vidSrcBody:"<p><strong>Kilde:</strong> Zealand Videndag 2026, workshop om kernekompetencer i 2030 (oktober 2026). Kompetencer og placeringer er formuleret af deltagerne.</p><p>Navne på de enkelte bidragydere er udeladt i den offentlige version.</p>",
     seed:"Hent Videndagens kompetencer som udgangspunkt", seeded:"Videndagens kompetencer er hentet ind og kan nu redigeres.",
     detailDefault:{vid:"<b>Vælg et punkt.</b> Klik på en af Videndagens kompetencer i figuren eller på listen.", dkeu:"<b>Vælg et punkt.</b> Klik på et tilføjet eller flyttet punkt i figuren eller på listen for at se begrundelsen og kilderne.",
@@ -404,7 +410,7 @@ const T = {
     ownSrcBody:`<p>Jeres indsatser gemmes kun i denne browser på denne enhed. Intet sendes nogen steder hen, før du selv vælger Send som mail eller Eksportér.</p>
       <p><strong>Send som mail</strong> åbner dit mailprogram med listen i brødteksten. <strong>Eksportér JSON</strong> giver en fil, som kollegaer eller studerende kan importere.</p>`,
     mailSubject:"Vores indsatser på Zealand: placering i forhold til kernekompetencer 2030",
-    mailIntro:"Vores indsatser på Zealand, placeret i forhold til WEF, The Future of Jobs Report 2025, figur 3.6 (Core skills in 2030).\nx = andel der anser kompetencen som kerne i dag (%), y = forventet stigning frem mod 2030 (%).",
+    mailIntro:"Vores indsatser på Zealand, placeret i forhold til WEF, The Future of Jobs Report 2025, figur 3.6 (Core skills in 2030).\nHver indsats er angivet med den kvadrant, den er placeret i.",
     mailCut:"(Listen er forkortet. Brug Eksportér JSON for den fulde liste.)",
     expSub:{dkeu:"Tilføjede og flyttede kompetencer er vurderede placeringer baseret på danske, nordiske og europæiske kilder.",
             vid:"Kompetencer diskuteret på Zealand Videndag 2026, placeret af deltagerne oven på WEF-figuren og DK/EU-blikket.",
@@ -426,7 +432,7 @@ const T = {
     lead:{
       wef:"Which skills are core today, and which do employers expect to grow by 2030? The figure is based on responses from more than 1,000 employers across 55 economies.",
       dkeu:"The same figure seen through Danish, Nordic and European sources. Seven skills WEF leaves out are added and four are moved. The new positions are qualitative assessments, not survey data.",
-      vid:"The skills participants discussed and positioned at the workshop on Zealand Knowledge Day 2026. WEF and DK/EU sit dimmed in the background and can be brought forward. Positions are the workshop's own assessments, not survey data.",
+      vid:"The skills participants discussed and positioned at the workshop on Zealand Knowledge Day 2026. WEF and DK/EU sit dimmed in the background and can be brought forward. Positions are approximate: they were set quickly at the workshop and are somewhat arbitrary. Only in step 4 are priorities placed precisely within the quadrant.",
       own:"This is where Zealand's official strategic priorities take shape while in development. Place them against WEF, DK/EU and the Knowledge Day skills, which sit dimmed in the background. Click in the chart to pick a position, drag points to move them. Everything is stored only in this browser."},
     x:"Share of employers considering it a core skill in 2025 (%)",
     y:"Share of employers expecting increasing use by 2030 (%)",
@@ -447,7 +453,11 @@ const T = {
     blind:["<b>Normative, not measured.</b> DigComp, GreenComp and the Union of Skills describe what citizens should be able to do. WEF measures what employers say they demand.",
            "<b>Politically mobile.</b> The softening of AI Act Art. 4 in the Digital Omnibus shows regulatory requirements can change quickly.",
            "<b>Relational skills under-covered.</b> EU frameworks say less about leadership, empathy and collaboration, which both WEF and the OECD emphasise."],
-    vidTitle:"Skills discussed, Zealand Knowledge Day 2026", vidMethod:"The skills and their positions were formulated by participants at the workshop and imported from the workshop export. The axes are WEF's, so positions show the workshop's view of how core each skill is today and how much it will grow.",
+    vidTitle:"Skills discussed, Zealand Knowledge Day 2026", vidMethod:"The skills and their positions were formulated by participants at the workshop and imported from the workshop export. The axes are WEF's, but positions are approximate and only roughly show which quadrant the workshop saw the skill in.",
+    vidObsTitle:"Observations",
+    vidObs:["<b>Positions are approximate.</b> Points were set quickly at the workshop and are somewhat arbitrary. Read them as quadrants, not precise percentages. Only in step 4 are priorities placed precisely.",
+            "<b>The Steady quadrant is empty.</b> None of the skills were judged core today without growing. That is curious. Perhaps because a workshop about the future naturally looks for growth, or because what we take for granted is rarely mentioned. Worth discussing: what is Zealand's stable foundation?"],
+    vidApprox:"Approximate position", vidEmpty:"Empty at Knowledge Day",
     vidSrcTitle:"About the Knowledge Day layer", vidSrcBody:"<p><strong>Source:</strong> Zealand Knowledge Day 2026, workshop on core skills in 2030 (October 2026). Skills and positions were formulated by participants.</p><p>Names of individual contributors are left out of the public version.</p>",
     seed:"Load the Knowledge Day skills as a starting point", seeded:"The Knowledge Day skills are loaded and can now be edited.",
     detailDefault:{vid:"<b>Pick a point.</b> Click one of the Knowledge Day skills in the chart or the list.", dkeu:"<b>Pick a point.</b> Click an added or moved point in the chart or the list to see the rationale and sources.",
@@ -472,7 +482,7 @@ const T = {
     ownSrcBody:`<p>Your priorities are stored only in this browser on this device. Nothing is sent anywhere until you choose Send by email or Export.</p>
       <p><strong>Send by email</strong> opens your mail app with the list in the body. <strong>Export JSON</strong> gives a file colleagues or students can import.</p>`,
     mailSubject:"Our priorities at Zealand: positions against core skills 2030",
-    mailIntro:"Our priorities at Zealand, positioned relative to WEF, The Future of Jobs Report 2025, figure 3.6 (Core skills in 2030).\nx = share considering it core today (%), y = expected increase by 2030 (%).",
+    mailIntro:"Our priorities at Zealand, positioned relative to WEF, The Future of Jobs Report 2025, figure 3.6 (Core skills in 2030).\nEach priority is listed with the quadrant it is placed in.",
     mailCut:"(List shortened. Use Export JSON for the full list.)",
     expSub:{dkeu:"Added and moved skills are assessed positions based on Danish, Nordic and European sources.",
             vid:"Skills discussed at Zealand Knowledge Day 2026, positioned by participants on top of the WEF figure and the DK/EU lens.",
@@ -633,6 +643,12 @@ function chartMarkup(thBase, dark, lang, opts){
     });
   }
 
+  if(mode==="vid" && !VIDENDAG.some(v=>quad(v)==="steady")){
+    const sx=(px(40)+X1)/2, sy=py(30);
+    s += `<g pointer-events="none"><rect x="${sx-120}" y="${sy-20}" width="240" height="34" rx="17" fill="none" stroke="${th.arrow}" stroke-dasharray="4 4"/>`;
+    s += `<text x="${sx}" y="${sy+2}" font-size="13" font-style="italic" fill="${th.muted}" text-anchor="middle">${esc(T[lang].vidEmpty)}</text></g>`;
+  }
+
   /* Egne punkter */
   if(mode==="own"){
     state.own.forEach(o=>{
@@ -714,9 +730,9 @@ function renderLeft(){
     let h = `<h2>${t.vidTitle}</h2><p class="note" style="margin-bottom:6px">${esc(t.vidMethod)}</p><div class="scroll">`;
     VIDENDAG.slice().sort((a,b)=>b.y-a.y).forEach(v=>{
       h += `<div class="item${state.sel==="v:"+v.id?" sel":""}" data-item="${v.id}"><h4 data-pickv="${v.id}">${markerSvg("v")}${esc(v.name)}</h4>
-        <p class="note">${t.tt2025} ${v.x} % · ${t.tt2030} ${v.y} % · ${esc(t.q[quad(v)][0])}${v.note?" · "+esc(v.note):""}</p></div>`;
+        <p class="note">${esc(t.q[quad(v)][0])}${v.note?" · "+esc(v.note):""}</p></div>`;
     });
-    el.innerHTML = h + `</div>`;
+    el.innerHTML = h + `</div><div class="blind"><h2>${t.vidObsTitle}</h2><ul>${t.vidObs.map(b=>`<li>${b}</li>`).join("")}</ul></div>`;
     return;
   }
   renderOwnEditor(el);
@@ -808,7 +824,7 @@ function renderOwnAll(){ renderChart(); renderLeft(); renderDetail(); }
 
 function sendMail(){
   const t=T_();
-  const lines = state.own.map(o=>`- ${o.name} (${catOf(o.c)[state.lang]}): x ${o.x}, y ${o.y}${o.note?". "+o.note:""}`);
+  const lines = state.own.map(o=>`- ${o.name} (${catOf(o.c)[state.lang]}): ${T_().q[quad(o)][0]}${o.note?". "+o.note:""}`);
   let body = t.mailIntro + "\n\n";
   for(const l of lines){ if((body+l).length > 1600){ body += "\n"+t.mailCut; break; } body += l + "\n"; }
   body += "\n" + (state.lang==="da"?"Kilde: ":"Source: ") + WEF_URL;
@@ -848,13 +864,13 @@ function renderDetail(){
   if(sel && sel.startsWith("v:") && showVid()){
     const v = VIDENDAG.find(v=>"v:"+v.id===sel);
     el.innerHTML = `<h3>${markerSvg("v")}${esc(v.name)} <span class="tag new">${t.tagVid}</span></h3>
-      <p class="note">${t.tt2025} ${v.x} % · ${t.tt2030} ${v.y} % · ${esc(t.q[quad(v)][0])}</p>${v.note?`<p>${esc(v.note)}</p>`:""}<p class="note">${esc(t.vidMethod)}</p>`;
+      <p class="note">${esc(t.q[quad(v)][0])} · ${esc(t.vidApprox)}</p>${v.note?`<p>${esc(v.note)}</p>`:""}<p class="note">${esc(t.vidMethod)}</p>`;
     return;
   }
   if(sel && sel.startsWith("o:") && state.mode==="own"){
     const o = state.own.find(o=>"o:"+o.id===sel);
     if(o){ el.innerHTML = `<h3><span class="dot" style="background:${color(o.c,isDark())};border-radius:3px"></span>${esc(o.name)} <span class="tag">${t.tagOwn}</span></h3>
-      <p class="note">${esc(catOf(o.c)[state.lang])} · ${t.tt2025} ${o.x} % · ${t.tt2030} ${o.y} % · ${esc(t.q[quad(o)][0])}</p>${o.note?`<p>${esc(o.note)}</p>`:""}
+      <p class="note">${esc(catOf(o.c)[state.lang])} · ${esc(t.q[quad(o)][0])}</p>${o.note?`<p>${esc(o.note)}</p>`:""}
       <div class="actions"><button data-edit-d="${o.id}">${t.edit}</button></div>`;
       el.querySelector("[data-edit-d]").onclick = ()=>{ state.editing=o.id; renderOwnAll(); document.getElementById("fName").focus(); };
       return; }
@@ -928,8 +944,10 @@ function showTip(k){
   const catLine = type==="v" ? `<div class="cat">${markerSvg("v")}${esc(t.tagVid)}</div>` : `<div class="cat"><span class="dot" style="background:${color(d.c,dark)}"></span>${esc(catOf(d.c)[state.lang])}</div>`;
   tip.innerHTML = `<b>${head}</b>
     ${catLine}
-    <div class="row"><span>${t.tt2025}</span><span>${d.x} %</span></div>
-    <div class="row"><span>${t.tt2030}</span><span>${d.y} %</span></div>${extra}`;
+    ${type==="v" ? `<div class="row"><span>${esc(t.q[quad(d)][0])}</span><span></span></div><div class="q">${esc(t.vidApprox)}</div>` :
+      type==="o" ? `<div class="row"><span>${esc(t.q[quad(d)][0])}</span><span></span></div>` :
+    `<div class="row"><span>${t.tt2025}</span><span>${d.x} %</span></div>
+    <div class="row"><span>${t.tt2030}</span><span>${d.y} %</span></div>`}${extra}`;
   const cr = chart.getBoundingClientRect();
   const mk = chart.querySelector(`[data-k="${k}"] .mk`); if(!mk) return;
   const r = mk.getBoundingClientRect();

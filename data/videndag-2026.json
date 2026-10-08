@@ -115,7 +115,24 @@
       "x": 18,
       "y": 66,
       "note": ""
+    },
+    {
+      "id": "v15",
+      "name": "Digital suverænitet",
+      "category": "eth",
+      "x": 54,
+      "y": 86,
+      "note": ""
+    },
+    {
+      "id": "v16",
+      "name": "Resiliens",
+      "category": "sef",
+      "x": 63,
+      "y": 77,
+      "note": ""
     }
   ],
-  "source": "Zealand Videndag 2026, workshop om kernekompetencer i 2030"
+  "source": "Zealand Videndag 2026, workshop om kernekompetencer i 2030",
+  "note": "Placeringerne er omtrentlige og blev sat hurtigt på workshoppen. Læs dem som kvadrant, ikke som præcise procenter."
 }

@@ -21,7 +21,8 @@ Figuren bygger på anerkendte offentlige kilder, som kan sammenholdes med diskus
 
 - WEF-placeringerne er aflæst fra figur 3.6 og afrundet (ca. ±2 procentpoint). Fire værdier er afstemt med tal i rapportens tekst. Eksakte værdier findes i WEF's [Data Explorer](https://www.weforum.org/publications/the-future-of-jobs-report-2025/data-explorer/).
 - Placeringerne i trin 2 er kvalitative vurderinger baseret på kilderne, ikke surveydata.
-- Placeringerne i trin 3 er workshoppens egne vurderinger. Navne på bidragydere er udeladt.
+- Placeringerne i trin 3 er omtrentlige. De blev sat hurtigt på workshoppen og er lidt tilfældige, så de bør læses som kvadrant, ikke som præcise procenter. Først i trin 4 placeres indsatserne præcist. Navne på bidragydere er udeladt.
+- Stabile-kvadranten er tom på Videndagen: ingen kompetencer blev vurderet som kerne i dag uden at vokse.
 
 ## Kilde
 
