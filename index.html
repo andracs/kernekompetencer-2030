@@ -374,7 +374,7 @@ const T = {
           vid:"Klik på et punkt for detaljer. Hold over de nedtonede punkter, eller brug Fremhæv WEF og Fremhæv DK/EU.",
           own:"Klik et tomt sted i figuren for at vælge placering. Træk i jeres punkter for at flytte dem. Hold over eller klik på de nedtonede punkter, eller brug knapperne til at fremhæve et lag."},
     mk:{wef:"WEF-placering", wefDim:"WEF (nedtonet)", nw:"Tilføjet (DK/EU)", mv:"Flyttet (DK/EU)", own:"Strategisk indsats", vid:"Videndag 2026"},
-    tt2025:"Kerne i 2025", tt2030:"Forventer stigning", est:"vurderet",
+    tt2025:"Kerne i 2025", tt2030:"Forventer stigning", est:"vurderet", estPos:"vurderet placering, ikke målt",
     tagNew:"Tilføjet", tagMove:"Flyttet", tagOwn:"Indsats", tagVid:"Videndag 2026", from:"fra", to:"til",
     tableTitle:"Alle 26 WEF-kompetencer", cols:["Kompetence","2025","2030","Kvadrant"],
     dkeuTitle:"Tilføjelser og flytninger", blindTitle:"Hvad DK/EU-perspektivet selv overser",
@@ -446,7 +446,7 @@ const T = {
           vid:"Click a point for details. Hover the dimmed points, or use Highlight WEF and Highlight DK/EU.",
           own:"Click an empty spot in the chart to choose the position. Drag your points to move them. Hover or click the dimmed points, or use the buttons to highlight a layer."},
     mk:{wef:"WEF position", wefDim:"WEF (dimmed)", nw:"Added (DK/EU)", mv:"Moved (DK/EU)", own:"Strategic priority", vid:"Knowledge Day 2026"},
-    tt2025:"Core in 2025", tt2030:"Expect increase", est:"assessed",
+    tt2025:"Core in 2025", tt2030:"Expect increase", est:"assessed", estPos:"assessed position, not measured",
     tagNew:"Added", tagMove:"Moved", tagOwn:"Priority", tagVid:"Knowledge Day 2026", from:"from", to:"to",
     tableTitle:"All 26 WEF skills", cols:["Skill","2025","2030","Quadrant"],
     dkeuTitle:"Additions and moves", blindTitle:"What the DK/EU lens misses",
@@ -706,8 +706,8 @@ function srcLinks(keys){ return `<div class="srcs">${keys.map(k=>`<a href="${SRC
 function dkeuDetailHTML(d){
   const t=T_(), lang=state.lang, dark=isDark();
   let pos;
-  if(d.kind==="move"){ const o=DATA.find(w=>w.id===d.ref); pos = `${t.tagMove} ${t.from} ${o.x}/${o.y} ${t.to} ${d.x}/${d.y} (${t.est})`; }
-  else pos = `${t.tt2025} ${d.x} %, ${t.tt2030.toLowerCase()} ${d.y} % (${t.est})`;
+  if(d.kind==="move"){ const o=DATA.find(w=>w.id===d.ref); const a=t.q[quad(o)][0], b=t.q[quad(d)][0]; pos = a===b ? `${b} · ${t.estPos}` : `${t.tagMove} ${t.from} ${a} ${t.to} ${b} · ${t.estPos}`; }
+  else pos = `${t.q[quad(d)][0]} · ${t.estPos}`;
   return `<h3><span class="dot" style="background:${color(d.c,dark)}"></span>${esc(nameOf(d,lang))} <span class="tag ${d.kind==="new"?"new":"move"}">${d.kind==="new"?t.tagNew:t.tagMove}</span></h3>
     <p class="note">${esc(pos)}</p><p>${esc(d.why[lang])}</p>${srcLinks(d.src)}`;
 }
@@ -937,7 +937,7 @@ function showTip(k){
   const {type,d} = findByKey(k); if(!d) return;
   const t = T_(), dark = isDark(), chart = document.getElementById("chart");
   let head = esc(nameOf(d,state.lang)), extra = "";
-  if(type==="d") extra = `<div class="q">${d.kind==="new"?t.tagNew:t.tagMove} (DK/EU) · ${t.est}</div>`;
+  if(type==="d") extra = `<div class="q">${d.kind==="new"?t.tagNew:t.tagMove} (DK/EU) · ${t.estPos}</div>`;
   if(type==="o" && d.note) extra = `<div class="q">${esc(d.note)}</div>`;
   if(type==="w") extra = `<div class="q">${esc(t.q[quad(d)][0])}</div>`;
   if(type==="v" && d.note) extra = `<div class="q">${esc(d.note)}</div>`;
@@ -945,7 +945,7 @@ function showTip(k){
   tip.innerHTML = `<b>${head}</b>
     ${catLine}
     ${type==="v" ? `<div class="row"><span>${esc(t.q[quad(d)][0])}</span><span></span></div><div class="q">${esc(t.vidApprox)}</div>` :
-      type==="o" ? `<div class="row"><span>${esc(t.q[quad(d)][0])}</span><span></span></div>` :
+      (type==="o" || type==="d") ? `<div class="row"><span>${esc(t.q[quad(d)][0])}</span><span></span></div>` :
     `<div class="row"><span>${t.tt2025}</span><span>${d.x} %</span></div>
     <div class="row"><span>${t.tt2030}</span><span>${d.y} %</span></div>`}${extra}`;
   const cr = chart.getBoundingClientRect();

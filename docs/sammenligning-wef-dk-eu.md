@@ -72,6 +72,82 @@ WEF ser et fald i manuelle færdigheder, men rapporten noterer selv, at voksende
 
 ## Placeringer i lag 2 (vurderet)
 
+Placeringerne er kvalitative vurderinger baseret på kilderne. Der er ingen målte tal bag dem, så de angives kun som kvadrant.
+
+| Kompetence | Type | Kvadrant (vurderet) | Primære kilder |
+|---|---|---|---|
+| AI-samarbejde og verifikation | Ny | Fremvoksende, tæt på kernen | PwC DK, AI-rådet SE, Kompetansebehovsutvalget, DigComp 3.0 |
+| Sikkerhedsbevidsthed for alle | Ny | Kernekompetencer (2030) | DigComp 3.0, Eurobarometer |
+| Regulatorisk forståelse | Ny | Fremvoksende | AI Act art. 4, DIGST, DST, AI-rådet SE |
+| Data- og AI-etik, digitale rettigheder | Ny | Fremvoksende | DigComp 3.0, DIGST, AI-rådet SE |
+| Kildekritik og informationsintegritet | Ny | Fremvoksende | DigComp 3.0, AI-rådet SE |
+| Domæneekspertise i samspil med AI | Ny | Kernekompetencer (2030) | Kompetansebehovsutvalget, CEFAU |
+| Digital suverænitet og leverandørrisiko | Ny | Fremvoksende | Kompetansebehovsutvalget |
+| Netværk og cybersikkerhed | Flyttet inden for Fremvoksende, op og mod kernen | Fremvoksende | Eurobarometer, ENISA |
+| Læsning, skrivning og matematik | Flyttet fra Uden for fokus | Kernekompetencer (2030) | Union of Skills |
+| Programmering (kodeforståelse og review) | Flyttet fra Uden for fokus | Fremvoksende | Digital Decade DK, Kompetansebehovsutvalget |
+| Fingerfærdighed (faglært præcision) | Flyttet inden for Uden for fokus, op | Uden for fokus | Klimarådet/HBS, WEF selv |
+
+## Kilderne kort
+
+| Kilde | Type | Hovedbudskab om kompetencer |
+|---|---|---|
+| WEF, *Future of Jobs Report 2025* (jan. 2025) | Global survey, 1.000+ arbejdsgivere | AI og big data, analytisk og kreativ tænkning, resiliens. Cybersikkerhed og miljø som "emerging". |
+| JRC, *DigComp 3.0* (nov. 2025) | EU-rammeværk for borgerkompetencer | Fem nye gennemgående temaer: AI inkl. generativ AI, cybersikkerhed, digitale rettigheder, trivsel, mis- og desinformation. 500+ læringsmål. |
+| AI Act art. 4 (gældende fra 2. feb. 2025) og Digital Omnibus (EU-Tidende juli 2026) | Regulering | Udbydere og idriftsættere skal støtte AI-færdigheder hos personalet. Omnibus blødgjorde formuleringen, men bevarede pligten. |
+| Digitaliseringsstyrelsen, *Vejledning om AI-færdigheder* | Dansk vejledning | Tre typer: teknologiske, praktiske og etiske færdigheder, differentieret efter rolle og risiko. |
+| Europa-Kommissionen, *Union of Skills* (mar. 2025) | EU-strategi | Mål for 2030: under 15 % lavtpræsterende i læsning, matematik, naturfag og digitalt. STEM-mål for erhvervs- og videregående uddannelser. |
+| Cedefop, *AI skills survey* (mar. 2025) | EU-survey blandt beskæftigede | Ca. 28 % af europæiske beskæftigede bruger AI i jobbet. Store huller i forståelse af AI. |
+| Eurobarometer om cyberkompetencer (2024) | EU-virksomhedssurvey | Over halvdelen af virksomheder, der søger cyberfolk, har svært ved at finde dem. 57 % lægger cyberopgaver oven i andre jobs. 74 % har ikke gennemført træning. |
+| ENISA, *State of Cybersecurity in the Union* (dec. 2024) og ECSF | EU-rapport og rollerammeværk | Styrkelse af cyber-arbejdsstyrken er en kritisk prioritet. ECSF definerer 12 rolleprofiler. |
+| JRC, *GreenComp* (2022) | EU-rammeværk | Bæredygtighed som kompetence: værdier, kompleksitet, fremtidsforestillinger og handling. |
+| Danmarks Statistik (mar. 2025) | Officiel statistik | Andelen af virksomheder med 10+ ansatte, der bruger AI, steg fra 15 % til 28 % (2023-2024). 80 % af dem, der overvejer AI, mangler viden og erfaring. |
+| Dansk Erhverv (feb. 2026) | Medlemssurvey | 70 % af medlemmerne bruger AI i 2025. Største barrierer: kompetencer og viden. |
+| Lederne (dec. 2024) | Ledersurvey | Lederne vurderer, at kun 15 % af medarbejderne har de nødvendige AI-kompetencer. |
+| PwC, *AI Jobs Barometer* DK (2026) | Analyse af jobopslag | Andelen af danske jobopslag med AI-krav steg fra 2,1 % til 3,2 %. Anvendelse prioriteres over udvikling. |
+| Aarhus Universitet, CEFAU research brief (2025) | Forskningsopsamling | AI ændrer primært opgavesammensætningen. Største risiko er mismatch mellem opgaver, kompetencer og løn, ikke jobtab. |
+| HBS Economics for Klimarådet (jan. 2024) | Litteraturreview | Efterspørgslen efter elektrikere ventes at stige ca. 17 % frem mod 2030. Mangel på faglærte kan bremse klimamålene. |
+| EU, *Digital Decade Country Report* DK (2025) | Landerapport | Høje digitale grundfærdigheder, men virksomheder, især SMV'er, har svært ved at rekruttere IKT-specialister. |
+| Kompetansebehovsutvalget, Norge (dec. 2025) | Statsligt udvalg | Tre mål: værdiskabelse, digital suverænitet og inklusion. Fremhæver "muliggørende kompetencer": domæneviden, kritisk tænkning og innovation. Over 70 % bruger generativ AI i arbejdet. |
+| Arbetsmarknadens AI-råd, Sverige (nov. 2025) | Partsinitiativ med AI Sweden | 81 % af akademikere ser behov for AI-kompetence, kun 32 % er tilbudt uddannelse. Nøgleområder: kildesporbarhed og kvalitetssikring, datakuratering og etik, forandringsledelse, tværfaglighed. |
+| Nordisk Ministerråd, *Future Skills* | Nordisk samarbejde | Digitale, grønne og AI-relaterede kompetencer samt livslang læring som fælles nordiske prioriteter. |
+
+## Fem temaer hvor DK/EU-billedet adskiller sig
+
+### 1. AI-samarbejde og verifikation
+WEF samler alt under "AI and big data". De nordiske kilder skelner skarpere. PwC finder, at danske arbejdsgivere efterspørger anvendelse frem for udvikling. Det svenske AI-råd peger på kildesporbarhed og kvalitetssikring. Den norske rapport anbefaler at styrke kritisk tænkning i brugen af AI. DigComp 3.0 integrerer AI på tværs af alle kompetenceområder.
+
+**Konsekvens for modellen:** en ny kompetence, *AI-samarbejde og verifikation*, i det fremvoksende felt tæt på kernen.
+
+### 2. Sikkerhed for alle, ikke kun for specialister
+WEF placerer "Networks and cybersecurity" som specialistkompetence med lav kernebetydning. Eurobarometer viser, at cyberopgaver i praksis ofte varetages af folk med andre primære jobs, og at træning mangler. DigComp 3.0 gør cybersikkerhed og tryghed til et gennemgående borgertema.
+
+**Konsekvens:** cybersikkerhed (specialist) flyttes op og til højre, og *sikkerhedsbevidsthed for alle* tilføjes i kernefeltet.
+
+### 3. Grundfærdigheder som fundament
+WEF's "out of focus" betyder, at arbejdsgiverne ikke forventer stigende brug, ikke at kompetencen er uvigtig. Union of Skills går den modsatte vej og gør grundlæggende læsning, matematik og digitale færdigheder til topprioritet. Samme logik gælder kodeforståelse: Danmark og Norge mangler IKT-specialister, og AI-genereret kode skal kunne læses og vurderes.
+
+**Konsekvens:** læsning, skrivning og matematik flyttes til kernefeltet. Programmering flyttes op som kodeforståelse og review.
+
+### 4. Regulering, rettigheder og suverænitet
+Ingen af WEF's 26 kompetencer handler om regulering, rettigheder eller teknologisk afhængighed. I EU er det centralt: AI Act art. 4, DIGST's etiske AI-færdigheder, DigComp 3.0's tema om digitale rettigheder og Danmarks Statistiks fund om regulatorisk usikkerhed som barriere. Den norske rapport gør digital suverænitet til et af tre overordnede mål.
+
+**Konsekvens:** tre nye kompetencer: *regulatorisk forståelse*, *data- og AI-etik og digitale rettigheder* samt *digital suverænitet og leverandørrisiko*. Desuden *kildekritik og informationsintegritet* fra DigComp 3.0.
+
+### 5. Faglærte og domæneekspertise
+WEF ser et fald i manuelle færdigheder, men rapporten noterer selv, at voksende job kræver højere manuel præcision. Klimarådets review forventer øget efterspørgsel efter elektrikere, smede og VVS'ere. Den norske rapport understreger, at domæneviden kombineret med digitale færdigheder er det, der gør teknologien nyttig.
+
+**Konsekvens:** fingerfærdighed flyttes op som faglært præcision, og *domæneekspertise i samspil med AI* tilføjes i kernefeltet.
+
+## Hvad DK/EU-perspektivet selv overser
+
+- **Normativt, ikke målt.** DigComp, GreenComp og Union of Skills beskriver, hvad borgere *bør* kunne. WEF måler, hvad arbejdsgivere *siger* de efterspørger. Ingen af delene er direkte målinger af arbejdsmarkedet.
+- **Politisk bevægelig.** Blødgørelsen af AI Act art. 4 i Digital Omnibus viser, at regulatoriske krav kan ændre sig hurtigt.
+- **Relationelle kompetencer underbelyses.** EU-rammeværkerne er stærke på digitale og grønne kompetencer, men siger mindre om ledelse, empati og samarbejde, som både WEF og OECD fremhæver.
+- **Placeringerne i lag 2 er vurderinger.** De nye og flyttede punkter er kvalitative skøn baseret på kilderne, ikke surveydata, og er markeret som sådan i figuren.
+
+## Placeringer i lag 2 (vurderet)
+
 | Kompetence | Type | Kerne nu (x) | Stigning (y) | Primære kilder |
 |---|---|---|---|---|
 | AI-samarbejde og verifikation | Ny | 33 | 88 | PwC DK, AI-rådet SE, Kompetansebehovsutvalget, DigComp 3.0 |
