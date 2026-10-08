@@ -104,6 +104,8 @@ td .dot{margin-right:6px;vertical-align:-1px}
 .qtag{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--chip);white-space:nowrap}
 .qtag.core{background:var(--accent-soft);color:var(--accent-soft-ink)}
 .scroll{max-height:560px;overflow:auto}
+.grp{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 0;padding-bottom:4px;border-bottom:2px solid var(--ink)}
+.grp .note{text-transform:none;letter-spacing:0;display:inline}
 .item{padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px}
 .item:last-child{border-bottom:0}
 .item h4{margin:0 0 4px;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;cursor:pointer}
@@ -162,6 +164,7 @@ textarea{resize:vertical;min-height:60px}
         <button id="btnBgWef" aria-pressed="false"></button>
         <button id="btnBgDk" aria-pressed="false"></button>
         <button id="btnBgVid" aria-pressed="false"></button>
+        <button id="btnRawVid" aria-pressed="false"></button>
         <button id="btnReset"></button>
       </div>
       <div class="group">
@@ -327,24 +330,59 @@ const DKEU = [
    src:["klima","wef"]}
 ];
 /* ---------- Zealand Videndag 2026: workshoppens kompetencer og placeringer ---------- */
+/* Videndag 2026. wx/wy = workshoppens oprindelige (omtrentlige) placering.
+   x/y = begrundet skøn: kategori efter WEF's Global Skills Taxonomy, placering ud fra beslægtede WEF- og DK/EU-kompetencer. */
 const VIDENDAG = [
-  {id:"v1",  name:"Samhørighed", cat0:"wwo", x:12, y:75, note:""},
-  {id:"v2",  name:"Situationsfornemmelse", cat0:"wwo", x:8, y:63, note:""},
-  {id:"v3",  name:"Sanselighed", cat0:"wwo", x:8, y:67, note:""},
-  {id:"v4",  name:"Filosofi (Kærlighed til visdom)", cat0:"wwo", x:49, y:71, note:""},
-  {id:"v5",  name:"Regenerativ tænkning", cat0:"wwo", x:24, y:74, note:"Permakultur"},
-  {id:"v6",  name:"Planetære mål", cat0:"own", x:26, y:79, note:""},
-  {id:"v7",  name:"Samskabelse / togetherness", cat0:"wwo", x:9, y:84, note:""},
-  {id:"v8",  name:"Etiske fordring", cat0:"eth", x:47, y:81, note:""},
-  {id:"v9",  name:"Analogisering", cat0:"tec", x:13, y:55, note:""},
-  {id:"v10", name:"Slow & fast & flow", cat0:"eth", x:53, y:62, note:""},
-  {id:"v11", name:"Nøjsom / sparsom", cat0:"tec", x:26, y:60, note:""},
-  {id:"v12", name:"Humanisme", cat0:"tec", x:29, y:83, note:""},
-  {id:"v13", name:"Selvbestemmelse", cat0:"sef", x:42, y:67, note:""},
-  {id:"v14", name:"Research skills", cat0:"cog", x:18, y:66, note:""},
-  {id:"v15", name:"Digital suverænitet", cat0:"eth", x:54, y:86, note:""},
-  {id:"v16", name:"Resiliens", cat0:"sef", x:63, y:77, note:""}
-].map(v=>Object.assign({c:"vid"}, v));
+  {id:"v1",  name:"Samhørighed", cat0:"wwo", wx:12, wy:75, x:43, y:53, p:"l",
+   why:{da:"Samarbejde. Sammenhold i teams og på arbejdspladsen er allerede centralt, ligesom WEF's empati og aktiv lytning, men ventes kun at vokse moderat.",
+        en:"Working with others. Cohesion in teams and workplaces is already central, like WEF's empathy and active listening, but is expected to grow only moderately."}},
+  {id:"v2",  name:"Situationsfornemmelse", cat0:"wwo", wx:8, wy:63, x:53, y:45,
+   why:{da:"Samarbejde. At læse situationen i mødet med kunder, borgere og kolleger er en etableret kompetence i praksisfag, ligesom WEF's serviceorientering. Kerne i dag, men ikke stærkt voksende.",
+        en:"Working with others. Reading the situation with customers, citizens and colleagues is established in practice-based fields, like WEF's service orientation. Core today, but not growing strongly."}},
+  {id:"v3",  name:"Sanselighed", cat0:"phy", wx:8, wy:67, x:9, y:45,
+   why:{da:"Fysiske evner. Tæt på WEF's sanseopfattelse, som ligger uden for fokus. Placeret højere end WEF, fordi Videndagen fremhævede det kropslige og sansede som modvægt til AI.",
+        en:"Physical abilities. Close to WEF's sensory-processing abilities, which are out of focus. Placed higher than WEF because Knowledge Day stressed the bodily and sensory as a counterweight to AI."}},
+  {id:"v4",  name:"Filosofi (Kærlighed til visdom)", cat0:"cog", wx:49, wy:71, x:14, y:58,
+   why:{da:"Kognitive færdigheder. Sjældent en kernekompetence for arbejdsgivere i dag, men kritisk og etisk refleksion forventes at vokse i takt med AI.",
+        en:"Cognitive skills. Rarely a core skill for employers today, but critical and ethical reflection is expected to grow with AI."}},
+  {id:"v5",  name:"Regenerativ tænkning", cat0:"eth", wx:24, wy:74, x:17, y:72, note:"Permakultur",
+   why:{da:"Etik. Beslægtet med WEF's miljøansvar: ikke kerne for de fleste i dag, men blandt de hurtigst voksende. Går et skridt videre end bæredygtighed ved at ville genopbygge.",
+        en:"Ethics. Related to WEF's environmental stewardship: not core for most today, but among the fastest growing. Goes a step beyond sustainability by aiming to regenerate."}},
+  {id:"v6",  name:"Planetære mål", cat0:"eth", wx:26, wy:79, x:25, y:77,
+   why:{da:"Etik. Planetære grænser som styringsmål. Følger miljøansvar og den grønne omstilling, men er bredere end den enkelte faglighed.",
+        en:"Ethics. Planetary boundaries as a guiding goal. Follows environmental stewardship and the green transition, but is broader than any single discipline."}},
+  {id:"v7",  name:"Samskabelse / togetherness", cat0:"wwo", wx:9, wy:84, x:55, y:72,
+   why:{da:"Samarbejde. Samskabelse med kolleger, virksomheder og studerende er allerede kerne og vokser, ligesom WEF's ledelse og social indflydelse.",
+        en:"Working with others. Co-creation with colleagues, companies and students is already core and growing, like WEF's leadership and social influence."}},
+  {id:"v8",  name:"Etiske fordring", cat0:"eth", wx:47, wy:81, x:10, y:66,
+   why:{da:"Etik. Løgstrups etiske fordring om ansvaret for den anden. Etik er ikke kerne hos arbejdsgivere i dag, men vokser med AI og automatiserede beslutninger, jf. DK/EU-lagets data- og AI-etik.",
+        en:"Ethics. Løgstrup's ethical demand: responsibility for the other. Ethics is not core for employers today but grows with AI and automated decisions, see the DK/EU layer's data and AI ethics."}},
+  {id:"v9",  name:"Analogisering", cat0:"cog", wx:13, wy:55, x:53, y:65,
+   why:{da:"Kognitive færdigheder. At overføre mønstre fra ét felt til et andet er en del af kreativ og analytisk tænkning, som begge er kerne og vokser.",
+        en:"Cognitive skills. Transferring patterns from one field to another is part of creative and analytical thinking, both core and growing."}},
+  {id:"v10", name:"Slow & fast & flow", cat0:"sef", wx:53, wy:62, x:34, y:61,
+   why:{da:"Mestringstro. Evnen til at skifte mellem hurtig og langsom tænkning og finde fordybelse. Beslægtet med motivation og selvindsigt og vokser med informationspresset.",
+        en:"Self-efficacy. Switching between fast and slow thinking and finding deep focus. Related to motivation and self-awareness, and growing with information pressure."}},
+  {id:"v11", name:"Nøjsom / sparsom", cat0:"mgt", wx:26, wy:60, x:45, y:36,
+   why:{da:"Ledelse og styring. Sparsommelig brug af ressourcer ligger tæt på WEF's ressourcestyring og drift: allerede kerne for mange, men ikke voksende i samme grad.",
+        en:"Management skills. Frugal use of resources is close to WEF's resource management and operations: already core for many, but not growing as fast."}},
+  {id:"v12", name:"Humanisme", cat0:"eth", wx:29, wy:83, x:22, y:53,
+   why:{da:"Etik. Mere et værdigrundlag end en målbar færdighed. Ligger tæt på globalt medborgerskab, men løftes af debatten om AI og menneskets rolle.",
+        en:"Ethics. More a value base than a measurable skill. Close to global citizenship, but lifted by the debate on AI and the human role."}},
+  {id:"v13", name:"Selvbestemmelse", cat0:"sef", wx:42, wy:67, x:51, y:59,
+   why:{da:"Mestringstro. Autonomi og selvledelse er allerede vigtigt i vidensarbejde og vokser, når arbejdet bliver mere selvstyret.",
+        en:"Self-efficacy. Autonomy and self-management already matter in knowledge work and grow as work becomes more self-directed."}},
+  {id:"v14", name:"Research skills", cat0:"cog", wx:18, wy:66, x:32, y:66,
+   why:{da:"Kognitive færdigheder. Undersøgende og videnskabelige metoder ligger tæt på analytisk tænkning og nysgerrighed. Ikke kerne i de fleste job i dag, men vokser med AI og vidensarbejde.",
+        en:"Cognitive skills. Inquiry and scientific methods are close to analytical thinking and curiosity. Not core in most jobs today, but growing with AI and knowledge work."}},
+  {id:"v15", name:"Digital suverænitet", cat0:"tec", wx:54, wy:86, x:43, y:84,
+   why:{da:"Teknologi. Tilføjet som kernekompetence 2030. Beslægtet med DK/EU-lagets digital suverænitet og leverandørrisiko, som den norske kompetencebehovsrapport gør til et overordnet mål.",
+        en:"Technology skills. Added as a core skill for 2030. Related to the DK/EU layer's digital sovereignty and supplier risk, which the Norwegian competence needs report makes an overarching goal."}},
+  {id:"v16", name:"Resiliens", cat0:"sef", wx:63, wy:77, x:66, y:75, p:"r",
+   why:{da:"Mestringstro. Tilføjet som kernekompetence 2030. Svarer til WEF's robusthed, fleksibilitet og omstillingsevne, som allerede er kerne og vokser.",
+        en:"Self-efficacy. Added as a core skill for 2030. Matches WEF's resilience, flexibility and agility, already core and growing."}}
+].map(v=>Object.assign({c:v.cat0, note:"", ex:v.x, ey:v.y}, v));
+function applyVidPos(){ VIDENDAG.forEach(v=>{ v.x = state.rawVid ? v.wx : v.ex; v.y = state.rawVid ? v.wy : v.ey; }); }
 const MOVED = new Set(DKEU.filter(d=>d.kind==="move").map(d=>d.ref));
 
 /* ---------- Tekster ---------- */
@@ -352,7 +390,7 @@ const T = {
   da:{
     steps:{wef:["World Economic Forum skills","Global arbejdsgiversurvey 2025"],
            dkeu:["Kompetencer som efterlyses i DK/EU","Danske, nordiske og EU-kilder"],
-           vid:["Diskuterede kompetencer, Zealand Videndag 2026","Workshoppens placeringer"],
+           vid:["Diskuterede kompetencer, Zealand Videndag 2026","Sorteret i kategorier, placering estimeret"],
            own:["Officielle strategiske indsatser på Zealand","Under udvikling"]},
     intro:"Figuren bygger på anerkendte offentlige kilder, som kan sammenholdes med diskussionerne på Zealands workshop. Følg de fire trin fra den globale arbejdsgiversurvey over de kompetencer, der efterlyses i Danmark og EU, til det, vi selv diskuterede på Videndag 2026, og videre til Zealands egne strategiske indsatser.",
     eyebrow:"Zealand · Kernekompetencer i 2030 · Grundlag: WEF Future of Jobs Report 2025, figur 3.6",
@@ -360,7 +398,7 @@ const T = {
     lead:{
       wef:"Hvilke kompetencer er kerne i dag, og hvilke forventer arbejdsgiverne vil vokse frem mod 2030? Figuren bygger på svar fra over 1.000 arbejdsgivere i 55 økonomier.",
       dkeu:"Samme figur set gennem danske, nordiske og europæiske kilder. Syv kompetencer, som WEF ikke har med, er tilføjet, og fire er flyttet. De nye placeringer er kvalitative vurderinger, ikke surveydata.",
-      vid:"De kompetencer, deltagerne diskuterede og placerede på workshoppen på Zealand Videndag 2026. WEF og DK/EU ligger nedtonet i baggrunden og kan hentes frem. Placeringerne er omtrentlige: de blev sat hurtigt på workshoppen og er lidt tilfældige. Først i trin 4 placeres indsatserne præcist i kvadranten.",
+      vid:"De kompetencer, deltagerne diskuterede og placerede på workshoppen på Zealand Videndag 2026. WEF og DK/EU ligger nedtonet i baggrunden og kan hentes frem. Workshoppens egne placeringer blev sat hurtigt og er lidt tilfældige. Derfor er kompetencerne her sorteret i WEF's kategorier og placeret ud fra et begrundet skøn. Workshoppens oprindelige placering kan vises med knappen. Først i trin 4 placeres indsatserne præcist.",
       own:"Her formuleres Zealands officielle strategiske indsatser, mens de er under udvikling. Placér dem i forhold til WEF, DK/EU og Videndagens kompetencer, som ligger nedtonet i baggrunden. Klik i figuren for at vælge en placering, træk i punkterne for at flytte dem. Alt gemmes kun i denne browser."},
     x:"Andel arbejdsgivere, der betragter kompetencen som kerne i 2025 (%)",
     y:"Andel, der forventer stigende brug frem mod 2030 (%)",
@@ -381,19 +419,23 @@ const T = {
     blind:["<b>Normativt, ikke målt.</b> DigComp, GreenComp og Union of Skills beskriver, hvad borgere bør kunne. WEF måler, hvad arbejdsgivere siger, de efterspørger.",
            "<b>Politisk bevægeligt.</b> Blødgørelsen af AI Act art. 4 i Digital Omnibus viser, at regulatoriske krav kan ændre sig hurtigt.",
            "<b>Relationelle kompetencer underbelyses.</b> EU-rammeværkerne siger mindre om ledelse, empati og samarbejde, som både WEF og OECD fremhæver."],
-    vidTitle:"Diskuterede kompetencer, Zealand Videndag 2026", vidMethod:"Kompetencerne og deres placering er formuleret af deltagerne på workshoppen og importeret fra workshoppens eksport. Akserne er WEF's, men placeringerne er omtrentlige og viser kun groft, hvilken kvadrant workshoppen så kompetencen i.",
+    vidTitle:"Diskuterede kompetencer, Zealand Videndag 2026", vidMethod:"Kompetencerne er formuleret af deltagerne. Kategorien følger WEF's Global Skills Taxonomy, og placeringen er et begrundet skøn ud fra beslægtede WEF- og DK/EU-kompetencer. Skønnet er ikke målt og kan diskuteres.",
+    vidMethodRaw:"Workshoppens oprindelige placeringer, som de blev sat på dagen. De er omtrentlige og lidt tilfældige, så læs dem som kvadrant, ikke som præcise procenter.",
+    rawVid:"Vis workshoppens placering", vidRaw:"Workshoppens oprindelige placering",
     vidObsTitle:"Bemærkninger",
-    vidObs:["<b>Placeringen er omtrentlig.</b> Punkterne blev sat hurtigt på workshoppen og er lidt tilfældige. Læs dem som kvadrant, ikke som præcise procenter. Først i trin 4 placeres indsatserne præcist.",
-            "<b>Stabile-kvadranten er tom.</b> Ingen af kompetencerne blev vurderet som kerne i dag uden at vokse. Det er spøjst. Måske fordi en workshop om fremtiden naturligt kigger efter vækst, eller fordi det, vi tager for givet, sjældent bliver nævnt. Værd at drøfte: hvad er Zealands stabile fundament?"],
-    vidApprox:"Omtrentlig placering", vidEmpty:"Tom på Videndagen",
-    vidSrcTitle:"Om Videndag-laget", vidSrcBody:"<p><strong>Kilde:</strong> Zealand Videndag 2026, workshop om kernekompetencer i 2030 (oktober 2026). Kompetencer og placeringer er formuleret af deltagerne.</p><p>Navne på de enkelte bidragydere er udeladt i den offentlige version.</p>",
+    vidObs:["<b>Placeringen er et skøn.</b> Workshoppens placeringer blev sat hurtigt og er lidt tilfældige, så punkterne er placeret ud fra deres kategori og beslægtede WEF- og DK/EU-kompetencer. Begrundelsen står ved hvert punkt. Først i trin 4 placeres indsatserne præcist.",
+            "<b>Stabile-kvadranten var tom på Videndagen.</b> Ingen kompetencer blev vurderet som kerne i dag uden at vokse. Det er spøjst. Måske fordi en workshop om fremtiden naturligt kigger efter vækst, eller fordi det, vi tager for givet, sjældent bliver nævnt. I skønnet havner Situationsfornemmelse og Nøjsom / sparsom dér. Værd at drøfte: hvad er Zealands stabile fundament?",
+            "<b>Mest etik, mestringstro og samarbejde.</b> Videndagens kompetencer samler sig om relationer, værdier og det personlige, mens teknologi kun er repræsenteret af digital suverænitet. Det er næsten omvendt af WEF, hvor teknologi og kognitive færdigheder dominerer."],
+    vidApprox:"Estimeret placering", vidEmpty:"Tom på Videndagen",
+    vidSrcTitle:"Om Videndag-laget", vidSrcBody:"<p><strong>Kilde:</strong> Zealand Videndag 2026, workshop om kernekompetencer i 2030 (oktober 2026). Kompetencerne er formuleret af deltagerne. Kategori og placering i figuren er et begrundet skøn, og workshoppens oprindelige placering kan vises med knappen.</p><p>Navne på de enkelte bidragydere er udeladt i den offentlige version.</p>",
     seed:"Hent Videndagens kompetencer som udgangspunkt", seeded:"Videndagens kompetencer er hentet ind og kan nu redigeres.",
     detailDefault:{vid:"<b>Vælg et punkt.</b> Klik på en af Videndagens kompetencer i figuren eller på listen.", dkeu:"<b>Vælg et punkt.</b> Klik på et tilføjet eller flyttet punkt i figuren eller på listen for at se begrundelsen og kilderne.",
                    own:"<b>Ingen valgt.</b> Klik på en af jeres indsatser for at se eller redigere den, eller på et nedtonet punkt for at se WEF- eller DK/EU-placeringen."},
     srcTitle:"Kilde og metode",
     copy:"Kopiér kildeangivelse", copied:"Kopieret",
     srcBody:`<p><strong>Data:</strong> World Economic Forum (2025). <em>The Future of Jobs Report 2025</em>, kapitel 3, figur 3.6 «Core skills in 2030». Genève: World Economic Forum. Udgivet 7. januar 2025.</p>
-      <p><strong>Grafisk forlæg:</strong> Adam Danyal og Julia Danyal, AIForLeaders.com.</p>`,
+      <p><strong>Grafisk forlæg:</strong> Adam Danyal og Julia Danyal, AIForLeaders.com.</p>
+      <p><strong>Kategorier:</strong> De otte farvekategorier er skill-grupperne i WEF's Global Skills Taxonomy, som rapporten bruger. De danske navne er vores oversættelse: Kognitive færdigheder (Cognitive skills), Mestringstro (Self-efficacy), Engagement (Engagement skills), Ledelse og styring (Management skills), Samarbejde (Working with others), Fysiske evner (Physical abilities), Teknologi (Technology skills) og Etik (Ethics).</p>`,
     note:`Placeringerne er aflæst fra figuren og afrundet til hele procent (usikkerhed ca. ±2 procentpoint). Analytisk tænkning (ca. 70 %), robusthed (67 %), nysgerrighed (50 %) og miljøansvar (ca. 20 %) er afstemt med de tal, rapportens tekst oplyser. Eksakte værdier findes i WEF's <a href="${EXPLORER_URL}" target="_blank" rel="noopener">Data Explorer</a>.`,
     apa:`World Economic Forum. (2025). The Future of Jobs Report 2025 (Figur 3.6: Core skills in 2030). ${WEF_URL}. Grafisk forlæg: A. Danyal og J. Danyal, AIForLeaders.com.`,
     dkeuSrcTitle:"Kilder til DK/EU-laget",
@@ -413,18 +455,18 @@ const T = {
     mailIntro:"Vores indsatser på Zealand, placeret i forhold til WEF, The Future of Jobs Report 2025, figur 3.6 (Core skills in 2030).\nHver indsats er angivet med den kvadrant, den er placeret i.",
     mailCut:"(Listen er forkortet. Brug Eksportér JSON for den fulde liste.)",
     expSub:{dkeu:"Tilføjede og flyttede kompetencer er vurderede placeringer baseret på danske, nordiske og europæiske kilder.",
-            vid:"Kompetencer diskuteret på Zealand Videndag 2026, placeret af deltagerne oven på WEF-figuren og DK/EU-blikket.",
+            vid:"Kompetencer diskuteret på Zealand Videndag 2026, sorteret i WEF-kategorier og placeret ud fra et begrundet skøn.",
             own:"Zealands strategiske indsatser (under udvikling), placeret oven på WEF, DK/EU og Videndag 2026."},
     exp1:"Kilde: World Economic Forum (2025). The Future of Jobs Report 2025, figur 3.6. weforum.org",
     exp2:"Grafisk forlæg: Adam Danyal og Julia Danyal, AIForLeaders.com. Værdier aflæst fra figuren og afrundet (±2 procentpoint).",
-    exp4:"Videndag: Zealand Videndag 2026, workshop om kernekompetencer i 2030. Placeringer sat af deltagerne.",
+    exp4:"Videndag: Zealand Videndag 2026. Kompetencer formuleret af deltagerne; kategori og placering er et begrundet skøn.",
     titleSuffix:{wef:"", dkeu:": efterlyst i DK/EU", vid:": Zealand Videndag 2026", own:": Zealands indsatser"},
     exp3:"DK/EU-kilder: DigComp 3.0, AI Act art. 4, Union of Skills, Eurobarometer, ENISA, DIGST, DST, PwC, Klimarådet, Kompetansebehovsutvalget, AI-rådet (SE)."
   },
   en:{
     steps:{wef:["World Economic Forum skills","Global employer survey 2025"],
            dkeu:["Skills in demand in DK/EU","Danish, Nordic and EU sources"],
-           vid:["Skills discussed, Zealand Knowledge Day 2026","Workshop positions"],
+           vid:["Skills discussed, Zealand Knowledge Day 2026","Sorted into categories, positions estimated"],
            own:["Official strategic priorities at Zealand","In development"]},
     intro:"The figure is built on recognised public sources that can be compared with the discussions at Zealand's workshop. Follow the four steps from the global employer survey, through the skills in demand in Denmark and the EU, to what we discussed at Knowledge Day 2026, and on to Zealand's own strategic priorities.",
     eyebrow:"Zealand · Core skills in 2030 · Based on WEF Future of Jobs Report 2025, figure 3.6",
@@ -432,7 +474,7 @@ const T = {
     lead:{
       wef:"Which skills are core today, and which do employers expect to grow by 2030? The figure is based on responses from more than 1,000 employers across 55 economies.",
       dkeu:"The same figure seen through Danish, Nordic and European sources. Seven skills WEF leaves out are added and four are moved. The new positions are qualitative assessments, not survey data.",
-      vid:"The skills participants discussed and positioned at the workshop on Zealand Knowledge Day 2026. WEF and DK/EU sit dimmed in the background and can be brought forward. Positions are approximate: they were set quickly at the workshop and are somewhat arbitrary. Only in step 4 are priorities placed precisely within the quadrant.",
+      vid:"The skills participants discussed and positioned at the workshop on Zealand Knowledge Day 2026. WEF and DK/EU sit dimmed in the background and can be brought forward. The workshop's own positions were set quickly and are somewhat arbitrary. So the skills here are sorted into WEF's categories and placed by a reasoned estimate. The workshop's original positions can be shown with the button. Only in step 4 are priorities placed precisely.",
       own:"This is where Zealand's official strategic priorities take shape while in development. Place them against WEF, DK/EU and the Knowledge Day skills, which sit dimmed in the background. Click in the chart to pick a position, drag points to move them. Everything is stored only in this browser."},
     x:"Share of employers considering it a core skill in 2025 (%)",
     y:"Share of employers expecting increasing use by 2030 (%)",
@@ -453,19 +495,23 @@ const T = {
     blind:["<b>Normative, not measured.</b> DigComp, GreenComp and the Union of Skills describe what citizens should be able to do. WEF measures what employers say they demand.",
            "<b>Politically mobile.</b> The softening of AI Act Art. 4 in the Digital Omnibus shows regulatory requirements can change quickly.",
            "<b>Relational skills under-covered.</b> EU frameworks say less about leadership, empathy and collaboration, which both WEF and the OECD emphasise."],
-    vidTitle:"Skills discussed, Zealand Knowledge Day 2026", vidMethod:"The skills and their positions were formulated by participants at the workshop and imported from the workshop export. The axes are WEF's, but positions are approximate and only roughly show which quadrant the workshop saw the skill in.",
+    vidTitle:"Skills discussed, Zealand Knowledge Day 2026", vidMethod:"The skills were formulated by participants. The category follows WEF's Global Skills Taxonomy, and the position is a reasoned estimate based on related WEF and DK/EU skills. The estimate is not measured and is open to discussion.",
+    vidMethodRaw:"The workshop's original positions as set on the day. They are approximate and somewhat arbitrary, so read them as quadrants, not precise percentages.",
+    rawVid:"Show workshop positions", vidRaw:"Workshop's original position",
     vidObsTitle:"Observations",
-    vidObs:["<b>Positions are approximate.</b> Points were set quickly at the workshop and are somewhat arbitrary. Read them as quadrants, not precise percentages. Only in step 4 are priorities placed precisely.",
-            "<b>The Steady quadrant is empty.</b> None of the skills were judged core today without growing. That is curious. Perhaps because a workshop about the future naturally looks for growth, or because what we take for granted is rarely mentioned. Worth discussing: what is Zealand's stable foundation?"],
-    vidApprox:"Approximate position", vidEmpty:"Empty at Knowledge Day",
-    vidSrcTitle:"About the Knowledge Day layer", vidSrcBody:"<p><strong>Source:</strong> Zealand Knowledge Day 2026, workshop on core skills in 2030 (October 2026). Skills and positions were formulated by participants.</p><p>Names of individual contributors are left out of the public version.</p>",
+    vidObs:["<b>Positions are estimates.</b> The workshop's positions were set quickly and are somewhat arbitrary, so points are placed by their category and related WEF and DK/EU skills. The reasoning is shown with each point. Only in step 4 are priorities placed precisely.",
+            "<b>The Steady quadrant was empty at Knowledge Day.</b> No skills were judged core today without growing. That is curious. Perhaps because a workshop about the future naturally looks for growth, or because what we take for granted is rarely mentioned. In the estimate, Situational awareness and Frugality land there. Worth discussing: what is Zealand's stable foundation?",
+            "<b>Mostly ethics, self-efficacy and collaboration.</b> The Knowledge Day skills cluster around relationships, values and the personal, while technology is represented only by digital sovereignty. That is almost the reverse of WEF, where technology and cognitive skills dominate."],
+    vidApprox:"Estimated position", vidEmpty:"Empty at Knowledge Day",
+    vidSrcTitle:"About the Knowledge Day layer", vidSrcBody:"<p><strong>Source:</strong> Zealand Knowledge Day 2026, workshop on core skills in 2030 (October 2026). Skills were formulated by participants. Category and position in the chart are a reasoned estimate, and the workshop's original positions can be shown with the button.</p><p>Names of individual contributors are left out of the public version.</p>",
     seed:"Load the Knowledge Day skills as a starting point", seeded:"The Knowledge Day skills are loaded and can now be edited.",
     detailDefault:{vid:"<b>Pick a point.</b> Click one of the Knowledge Day skills in the chart or the list.", dkeu:"<b>Pick a point.</b> Click an added or moved point in the chart or the list to see the rationale and sources.",
                    own:"<b>Nothing selected.</b> Click one of your priorities to view or edit it, or a dimmed point to see the WEF or DK/EU position."},
     srcTitle:"Source and method",
     copy:"Copy citation", copied:"Copied",
     srcBody:`<p><strong>Data:</strong> World Economic Forum (2025). <em>The Future of Jobs Report 2025</em>, chapter 3, figure 3.6 "Core skills in 2030". Geneva: World Economic Forum. Published 7 January 2025.</p>
-      <p><strong>Graphic adapted from:</strong> Adam Danyal and Julia Danyal, AIForLeaders.com.</p>`,
+      <p><strong>Graphic adapted from:</strong> Adam Danyal and Julia Danyal, AIForLeaders.com.</p>
+      <p><strong>Categories:</strong> The eight colour categories are the skill groups in WEF's Global Skills Taxonomy, which the report uses.</p>`,
     note:`Positions are read from the figure and rounded to whole percentages (uncertainty approx. ±2 percentage points). Analytical thinking (approx. 70%), resilience (67%), curiosity (50%) and environmental stewardship (approx. 20%) are aligned with figures stated in the report text. Exact values are available in the WEF <a href="${EXPLORER_URL}" target="_blank" rel="noopener">Data Explorer</a>.`,
     apa:`World Economic Forum. (2025). The Future of Jobs Report 2025 (Figure 3.6: Core skills in 2030). ${WEF_URL}. Graphic adapted from A. Danyal and J. Danyal, AIForLeaders.com.`,
     dkeuSrcTitle:"Sources for the DK/EU layer",
@@ -485,11 +531,11 @@ const T = {
     mailIntro:"Our priorities at Zealand, positioned relative to WEF, The Future of Jobs Report 2025, figure 3.6 (Core skills in 2030).\nEach priority is listed with the quadrant it is placed in.",
     mailCut:"(List shortened. Use Export JSON for the full list.)",
     expSub:{dkeu:"Added and moved skills are assessed positions based on Danish, Nordic and European sources.",
-            vid:"Skills discussed at Zealand Knowledge Day 2026, positioned by participants on top of the WEF figure and the DK/EU lens.",
+            vid:"Skills discussed at Zealand Knowledge Day 2026, sorted into WEF categories and placed by a reasoned estimate.",
             own:"Zealand's strategic priorities (in development), placed on top of WEF, DK/EU and Knowledge Day 2026."},
     exp1:"Source: World Economic Forum (2025). The Future of Jobs Report 2025, figure 3.6. weforum.org",
     exp2:"Graphic adapted from Adam Danyal and Julia Danyal, AIForLeaders.com. Values read from the figure and rounded (±2 percentage points).",
-    exp4:"Knowledge Day: Zealand Knowledge Day 2026, workshop on core skills in 2030. Positions set by participants.",
+    exp4:"Knowledge Day: Zealand Knowledge Day 2026. Skills formulated by participants; category and position are a reasoned estimate.",
     titleSuffix:{wef:"", dkeu:": in demand in DK/EU", vid:": Zealand Knowledge Day 2026", own:": Zealand priorities"},
     exp3:"DK/EU sources: DigComp 3.0, AI Act Art. 4, Union of Skills, Eurobarometer, ENISA, DIGST, Statistics Denmark, PwC, Danish Climate Council, Kompetansebehovsutvalget, AI council (SE)."
   }
@@ -510,7 +556,7 @@ const state = {
   mode: "vid",
   lang: saved.lang==="en" ? "en" : "da",
   own: Array.isArray(saved.own) ? saved.own.filter(validOwn) : [],
-  labels:true, bgWef:false, bgDk:false, bgVid:false, focus:null, sort:{k:"y",dir:-1}, pinned:null, sel:null, editing:null
+  labels:true, bgWef:false, bgDk:false, bgVid:false, rawVid:false, focus:null, sort:{k:"y",dir:-1}, pinned:null, sel:null, editing:null
 };
 function validOwn(o){ return o && typeof o.name==="string" && o.name.trim() && isFinite(o.x) && isFinite(o.y); }
 /* Engangsoprydning (v2): fjern testpunkter, og tilføj udfyld-eksemplet én gang */
@@ -650,8 +696,8 @@ function chartMarkup(thBase, dark, lang, opts){
       const cx=px(v.x), cy=py(v.y), op = (matches(v)?1:0.15) * (vd?0.45:1), lines=wrapName(v.name);
       s += `<g class="pt${state.sel==="v:"+v.id?" on":""}" data-k="v:${v.id}" opacity="${op}">`;
       s += `<circle cx="${cx}" cy="${cy}" r="15" fill="transparent"/>`;
-      s += `<path class="mk" d="${hexagon(cx,cy,vd?7:10.5)}" fill="${th.hl}" stroke="${dark?"#FFF387":"#000000"}" stroke-width="${vd?1.2:1.8}" stroke-linejoin="round"/>`;
-      if(!vd && state.labels){ const L = labelPos(cx,cy, v.x<62?"r":"l", lines.length); s += textBlock(lines, L.lx, L.ly, L.a, th, 600); }
+      s += `<path class="mk" d="${hexagon(cx,cy,vd?7:10.5)}" fill="${color(v.c,dark)}" stroke="${dark?"#FFF387":"#000000"}" stroke-width="${vd?1.2:1.8}" stroke-linejoin="round"/>`;
+      if(!vd && state.labels){ const L = labelPos(cx,cy, (!state.rawVid && v.p) ? v.p : (v.x<62?"r":"l"), lines.length); s += textBlock(lines, L.lx, L.ly, L.a, th, 600); }
       s += `</g>`;
     });
   }
@@ -681,7 +727,7 @@ function chartMarkup(thBase, dark, lang, opts){
 function renderChart(){
   const dark = isDark(), th = THEMES[dark?"dark":"light"];
   const el = document.getElementById("chart");
-  const old = el.querySelector("svg"); if(old) old.remove();
+  const old = el.querySelector(":scope > svg"); if(old) old.remove();
   el.classList.toggle("placing", state.mode==="own");
   el.insertAdjacentHTML("beforeend",
     `<svg viewBox="0 0 1000 715" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(T_().titlePlain)}" font-family="Inter, 'Helvetica Neue', Arial, sans-serif">${chartMarkup(th,dark,state.lang)}</svg>`);
@@ -692,7 +738,7 @@ function markerSvg(kind, col, card){
   if(kind==="w") return `<svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="${col}"/></svg>`;
   if(kind==="wd") return `<svg width="14" height="14"><circle cx="7" cy="7" r="4.5" fill="${col}" opacity=".35"/></svg>`;
   if(kind==="n") return `<svg width="16" height="16"><path d="${diamond(8,8,7)}" fill="${col}"/></svg>`;
-  if(kind==="v") return `<svg width="16" height="16"><path d="${hexagon(8,8,7)}" fill="#FFF387" stroke="#000" stroke-width="1.3"/></svg>`;
+  if(kind==="v") return `<svg width="16" height="16"><path d="${hexagon(8,8,7)}" fill="${col||"#9A9A9A"}" stroke="#000" stroke-width="1.3"/></svg>`;
   if(kind==="m") return `<svg width="16" height="16"><circle cx="8" cy="8" r="5.5" fill="${card}" stroke="${col}" stroke-width="2.5"/></svg>`;
   return `<svg width="16" height="16"><rect x="2" y="2" width="12" height="12" rx="3" fill="${col}"/></svg>`;
 }
@@ -740,10 +786,16 @@ function renderLeft(){
     return;
   }
   if(state.mode==="vid"){
-    let h = `<h2>${t.vidTitle}</h2><p class="note" style="margin-bottom:6px">${esc(t.vidMethod)}</p><div class="scroll">`;
-    VIDENDAG.slice().sort((a,b)=>b.y-a.y).forEach(v=>{
-      h += `<div class="item${state.sel==="v:"+v.id?" sel":""}" data-item="${v.id}"><h4 data-pickv="${v.id}">${markerSvg("v")}${esc(v.name)}</h4>
-        <p class="note">${esc(t.q[quad(v)][0])}${v.note?" · "+esc(v.note):""}</p></div>`;
+    const dark=isDark();
+    let h = `<h2>${t.vidTitle}</h2><p class="note" style="margin-bottom:6px">${esc(state.rawVid?t.vidMethodRaw:t.vidMethod)}</p><div class="scroll">`;
+    Object.keys(CATS).forEach(ck=>{
+      const items = VIDENDAG.filter(v=>v.c===ck).sort((a,b)=>b.y-a.y);
+      if(!items.length) return;
+      h += `<h3 class="grp"><span class="dot" style="background:${color(ck,dark)}"></span>${esc(CATS[ck][state.lang])} <span class="note">(${items.length})</span></h3>`;
+      items.forEach(v=>{
+        h += `<div class="item${state.sel==="v:"+v.id?" sel":""}" data-item="${v.id}"><h4 data-pickv="${v.id}">${markerSvg("v",color(v.c,dark))}${esc(v.name)}</h4>
+          <p class="note">${esc(t.q[quad(v)][0])}${v.note?" · "+esc(v.note):""}</p><p>${esc(v.why[state.lang])}</p></div>`;
+      });
     });
     el.innerHTML = h + `</div><div class="blind"><h2>${t.vidObsTitle}</h2><ul>${t.vidObs.map(b=>`<li>${b}</li>`).join("")}</ul></div>`;
     return;
@@ -831,7 +883,7 @@ function setDraftPos(x,y){
 }
 function renderChartWithGhost(x,y){
   renderChart();
-  const svg = document.querySelector("#chart svg"), dark=isDark();
+  const svg = document.querySelector("#chart > svg"), dark=isDark();
   svg.insertAdjacentHTML("beforeend", `<g pointer-events="none"><circle cx="${px(x)}" cy="${py(y)}" r="11" fill="none" stroke="${dark?"#FFF387":"#000000"}" stroke-width="2" stroke-dasharray="3 3"/><line x1="${px(x)-17}" y1="${py(y)}" x2="${px(x)+17}" y2="${py(y)}" stroke="${dark?"#FFF387":"#000000"}"/><line x1="${px(x)}" y1="${py(y)-17}" x2="${px(x)}" y2="${py(y)+17}" stroke="${dark?"#FFF387":"#000000"}"/></g>`);
 }
 function renderOwnAll(){ renderChart(); renderLeft(); renderDetail(); }
@@ -877,8 +929,8 @@ function renderDetail(){
   if(sel && sel.startsWith("d:") && showDkeu()){ el.innerHTML = dkeuDetailHTML(DKEU.find(d=>"d:"+d.id===sel)); return; }
   if(sel && sel.startsWith("v:") && showVid()){
     const v = VIDENDAG.find(v=>"v:"+v.id===sel);
-    el.innerHTML = `<h3>${markerSvg("v")}${esc(v.name)} <span class="tag new">${t.tagVid}</span></h3>
-      <p class="note">${esc(t.q[quad(v)][0])} · ${esc(t.vidApprox)}</p>${v.note?`<p>${esc(v.note)}</p>`:""}<p class="note">${esc(t.vidMethod)}</p>`;
+    el.innerHTML = `<h3>${markerSvg("v",color(v.c,isDark()))}${esc(v.name)} <span class="tag new">${t.tagVid}</span></h3>
+      <p class="note">${esc(catOf(v.c)[state.lang])} · ${esc(t.q[quad(v)][0])} · ${esc(state.rawVid?t.vidRaw:t.vidApprox)}</p>${v.note?`<p>${esc(v.note)}</p>`:""}${state.rawVid?"":`<p>${esc(v.why[state.lang])}</p>`}`;
     return;
   }
   if(sel && sel.startsWith("o:") && state.mode==="own"){
@@ -930,6 +982,7 @@ function renderText(){
   document.getElementById("btnLabels").textContent = t.labels;
   [["btnBgWef","bgWef"],["btnBgDk","bgDk"],["btnBgVid","bgVid"]].forEach(([id,k])=>{ const b=document.getElementById(id); b.textContent=t[k]; b.hidden = k==="bgVid" ? state.mode!=="own" : !layered(); b.setAttribute("aria-pressed", state[k]); });
   document.getElementById("btnLabels").hidden = state.mode==="dkeu";
+  const br = document.getElementById("btnRawVid"); br.textContent = t.rawVid; br.hidden = state.mode!=="vid"; br.setAttribute("aria-pressed", state.rawVid);
   document.getElementById("btnReset").textContent = t.reset;
   document.getElementById("btnPng").textContent = t.png;
   const order = ["wef","dkeu","vid","own"];
@@ -955,10 +1008,10 @@ function showTip(k){
   if(type==="o" && d.note) extra = `<div class="q">${esc(d.note)}</div>`;
   if(type==="w") extra = `<div class="q">${esc(t.q[quad(d)][0])}</div>`;
   if(type==="v" && d.note) extra = `<div class="q">${esc(d.note)}</div>`;
-  const catLine = type==="v" ? `<div class="cat">${markerSvg("v")}${esc(t.tagVid)}</div>` : `<div class="cat"><span class="dot" style="background:${color(d.c,dark)}"></span>${esc(catOf(d.c)[state.lang])}</div>`;
+  const catLine = type==="v" ? `<div class="cat">${markerSvg("v",color(d.c,dark))}${esc(catOf(d.c)[state.lang])} · ${esc(t.tagVid)}</div>` : `<div class="cat"><span class="dot" style="background:${color(d.c,dark)}"></span>${esc(catOf(d.c)[state.lang])}</div>`;
   tip.innerHTML = `<b>${head}</b>
     ${catLine}
-    ${type==="v" ? `<div class="row"><span>${esc(t.q[quad(d)][0])}</span><span></span></div><div class="q">${esc(t.vidApprox)}</div>` :
+    ${type==="v" ? `<div class="row"><span>${esc(t.q[quad(d)][0])}</span><span></span></div><div class="q">${esc(state.rawVid?t.vidRaw:t.vidApprox)}</div>` :
       (type==="o" || type==="d") ? `<div class="row"><span>${esc(t.q[quad(d)][0])}</span><span></span></div>` :
     `<div class="row"><span>${t.tt2025}</span><span>${d.x} %</span></div>
     <div class="row"><span>${t.tt2030}</span><span>${d.y} %</span></div>`}${extra}`;
@@ -977,7 +1030,7 @@ function hideTip(){ if(!state.pinned) tip.classList.remove("show"); }
 /* ---------- Hændelser i figuren ---------- */
 const chartEl = document.getElementById("chart");
 let drag = null, suppressClick = false;
-function svgPoint(evt){ const svg = chartEl.querySelector("svg"); const p = svg.createSVGPoint(); p.x=evt.clientX; p.y=evt.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+function svgPoint(evt){ const svg = chartEl.querySelector(":scope > svg"); const p = svg.createSVGPoint(); p.x=evt.clientX; p.y=evt.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
 
 chartEl.addEventListener("mouseover", e=>{ if(drag) return; const g=e.target.closest(".pt"); if(g && !state.pinned) showTip(g.dataset.k); });
 chartEl.addEventListener("mouseout", e=>{ const g=e.target.closest(".pt"); if(g && !g.contains(e.relatedTarget)) hideTip(); });
@@ -1015,7 +1068,7 @@ chartEl.addEventListener("click", e=>{
   }
   if(state.pinned){ state.pinned=null; tip.classList.remove("show"); renderChart(); return; }
   if(state.mode==="own"){
-    const svg = chartEl.querySelector("svg"); if(!svg.contains(e.target)) return;
+    const svg = chartEl.querySelector(":scope > svg"); if(!svg.contains(e.target)) return;
     const p = svgPoint(e);
     if(p.x>=X0 && p.x<=X1 && p.y>=Y0 && p.y<=Y1){ setDraftPos(ux(p.x), uy(p.y)); }
     return;
@@ -1040,10 +1093,12 @@ document.getElementById("legend").addEventListener("click", e=>{
   renderLegend(); renderChart(); if(state.mode==="wef") renderLeft();
 });
 document.querySelectorAll("[data-mode]").forEach(b=> b.onclick = ()=>{
+  if(state.rawVid){ state.rawVid=false; applyVidPos(); }
   state.mode = b.dataset.mode; state.pinned=null; state.sel=null; state.editing=null; tip.classList.remove("show"); persist(); renderAll();
 });
 document.getElementById("btnLabels").onclick = e=>{ state.labels=!state.labels; e.target.setAttribute("aria-pressed",state.labels); renderChart(); };
 [["btnBgWef","bgWef"],["btnBgDk","bgDk"],["btnBgVid","bgVid"]].forEach(([id,k])=>{ document.getElementById(id).onclick = e=>{ state[k]=!state[k]; e.target.setAttribute("aria-pressed",state[k]); renderLegend(); renderChart(); }; });
+document.getElementById("btnRawVid").onclick = ()=>{ state.rawVid = !state.rawVid; applyVidPos(); renderText(); renderChart(); renderLeft(); renderDetail(); };
 document.getElementById("btnReset").onclick = ()=>{ state.focus=null; state.pinned=null; state.sel=null; tip.classList.remove("show"); renderLegend(); renderChart(); renderLeft(); renderDetail(); };
 document.querySelectorAll("[data-lang]").forEach(b=> b.onclick = ()=>{ state.lang=b.dataset.lang; tip.classList.remove("show"); state.pinned=null; persist(); renderAll(); });
 document.getElementById("btnTheme").onclick = ()=>{ root.dataset.theme = isDark() ? "light" : "dark"; renderAll(); };
@@ -1070,7 +1125,7 @@ document.getElementById("btnPng").onclick = ()=>{
       const m = k==="wd" ? `<circle cx="${x+6}" cy="${y-4}" r="4.5" fill="${ink}" opacity=".4"/>` :
                 k==="n" ? `<path d="${diamond(x+6,y-4,7)}" fill="${ink}"/>` :
                 k==="m" ? `<circle cx="${x+6}" cy="${y-4}" r="5.5" fill="#fff" stroke="${ink}" stroke-width="2.5"/>` :
-                k==="v" ? `<path d="${hexagon(x+6,y-4,7.5)}" fill="#FFF387" stroke="#000" stroke-width="1.4"/>` :
+                k==="v" ? `<path d="${hexagon(x+6,y-4,7.5)}" fill="#9A9A9A" stroke="#000" stroke-width="1.4"/>` :
                 `<rect x="${x}" y="${y-10}" width="12" height="12" rx="3" fill="${ink}"/>`;
       leg += m + `<text x="${x+20}" y="${y}" font-size="13" fill="${th.ink}">${esc(lab)}</text>`;
     });
